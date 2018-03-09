@@ -52,10 +52,25 @@ log(info "C++ compile flags:" ${IGD_CXX_COMPILEFLAGS})
 find_package(Threads REQUIRED)
 list(APPEND IGD_EXTERNAL_LIBS ${CMAKE_THREAD_LIBS_INIT})
 
+set(IDG_USES_SFML_BACKEND True)
+register_definitions(IDG_USES_SFML_BACKEND)
+
+if (${IDG_USES_SFML_BACKEND})
+    set(SFML_ROOT ${CMAKE_SOURCE_DIR}/thirdparty/sfml)
+    set(SFML_LIBS sfml-system sfml-window sfml-graphics sfml-audio)
+    set(SFML_BUILD_NETWORK False)
+    set(__SAVED_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
+    set(BUILD_SHARED_LIBS False)
+    add_subdirectory(${SFML_ROOT})
+    set(BUILD_SHARED_LIBS ${__SAVED_BUILD_SHARED_LIBS})
+    unset(__SAVED_BUILD_SHARED_LIBS)
+    include_directories(${SFML_ROOT}/include/)
+    list(APPEND IGD_EXTERNAL_LIBS ${SFML_LIBS})
+endif()
+
 set(GUM_ROOT ${CMAKE_SOURCE_DIR}/thirdparty/gum)
 set(GUM_LIBS gum-static)
 add_subdirectory(${GUM_ROOT})
-
 include_directories(${GUM_ROOT})
 list(APPEND IGD_EXTERNAL_LIBS ${GUM_LIBS})
 
