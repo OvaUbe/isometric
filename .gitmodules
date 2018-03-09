@@ -1,0 +1,6 @@
+[submodule "thirdparty/gum"]
+	path = thirdparty/gum
+	url = https://github.com/OvaUbe/gum
+[submodule "cmake/castella"]
+	path = cmake/castella
+	url = https://github.com/OvaUbe/castella
