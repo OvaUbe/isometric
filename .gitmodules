@@ -4,6 +4,3 @@
 [submodule "cmake/castella"]
 	path = cmake/castella
 	url = https://github.com/OvaUbe/castella
-[submodule "thirdparty/sfml"]
-	path = thirdparty/sfml
-	url = https://github.com/SFML/SFML
