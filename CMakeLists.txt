@@ -10,6 +10,8 @@ include(cmake/castella/String.cmake)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_INCLUDE_CURRENT_DIR True)
+set(CMAKE_AUTOMOC True)
 
 log(info "Cmake build type:" ${CMAKE_BUILD_TYPE})
 log(info "C++ standard:" ${CMAKE_CXX_STANDARD})
@@ -53,6 +55,10 @@ log(info "C++ compile flags:" ${IGD_CXX_COMPILEFLAGS})
 
 find_package(Threads REQUIRED)
 list(APPEND IGD_EXTERNAL_LIBS ${CMAKE_THREAD_LIBS_INIT})
+
+find_package(Qt5Quick)
+find_package(Qt5Core)
+list(APPEND IGD_EXTERNAL_LIBS Qt5::Quick Qt5::Core)
 
 set(GUM_ROOT ${CMAKE_SOURCE_DIR}/thirdparty/gum)
 set(GUM_LIBS gum-static)
