@@ -2,13 +2,13 @@ cmake_minimum_required(VERSION 2.8)
 
 project(isometric)
 
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
-
 include(cmake/castella/Install.cmake)
 include(cmake/castella/Log.cmake)
 include(cmake/castella/Misc.cmake)
 include(cmake/castella/Platform.cmake)
 include(cmake/castella/String.cmake)
+
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     set(IGD_RELEASE_BUILD False)
