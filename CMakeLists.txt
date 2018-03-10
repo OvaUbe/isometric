@@ -72,7 +72,7 @@ include_directories(${CMAKE_SOURCE_DIR})
 
 dump_definitions()
 
-add_executable(isometric ${IGD_SOURCES} ${GLAD_SOURCES})
+add_executable(isometric ${IGD_SOURCES})
 set_target_properties(isometric PROPERTIES COMPILE_FLAGS ${IGD_CXX_COMPILEFLAGS})
 target_link_libraries(isometric ${IGD_EXTERNAL_LIBS})
 
