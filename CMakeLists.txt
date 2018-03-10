@@ -10,6 +10,8 @@ include(cmake/castella/String.cmake)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
 
+log(info "Cmake build type:" ${CMAKE_BUILD_TYPE})
+
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     set(IGD_RELEASE_BUILD False)
     set(IGD_DEBUG_BUILD True)
