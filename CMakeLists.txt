@@ -1,14 +1,20 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.2)
 
 project(isometric)
-
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
 
 include(cmake/castella/Install.cmake)
 include(cmake/castella/Log.cmake)
 include(cmake/castella/Misc.cmake)
 include(cmake/castella/Platform.cmake)
 include(cmake/castella/String.cmake)
+
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_INCLUDE_CURRENT_DIR True)
+set(CMAKE_AUTOMOC True)
+
+log(info "Cmake build type:" ${CMAKE_BUILD_TYPE})
+log(info "C++ standard:" ${CMAKE_CXX_STANDARD})
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     set(IGD_RELEASE_BUILD False)
@@ -32,7 +38,6 @@ else()
     set(IGD_OPTIMIZE_FOR_SIZE False)
 endif()
 
-set(IGD_CXX_STANDARD_SWITCH "-std=c++14")
 set(IGD_CXX_COMPILER_DIAGNOSTICS_SWITCH "-Wall -Wextra -Wpedantic -Werror")
 
 if(${IGD_OPTIMIZE_FOR_SIZE})
@@ -42,7 +47,6 @@ else()
 endif()
 
 string_join(IGD_CXX_COMPILEFLAGS " "
-    ${IGD_CXX_STANDARD_SWITCH}
     ${IGD_CXX_COMPILER_DIAGNOSTICS_SWITCH}
     ${IGD_CXX_OPTIMIZATION_SWITCH}
 )
@@ -52,21 +56,9 @@ log(info "C++ compile flags:" ${IGD_CXX_COMPILEFLAGS})
 find_package(Threads REQUIRED)
 list(APPEND IGD_EXTERNAL_LIBS ${CMAKE_THREAD_LIBS_INIT})
 
-set(IDG_USES_SFML_BACKEND True)
-register_definitions(IDG_USES_SFML_BACKEND)
-
-if (${IDG_USES_SFML_BACKEND})
-    set(SFML_ROOT ${CMAKE_SOURCE_DIR}/thirdparty/sfml)
-    set(SFML_LIBS sfml-system sfml-window sfml-graphics sfml-audio)
-    set(SFML_BUILD_NETWORK False)
-    set(__SAVED_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
-    set(BUILD_SHARED_LIBS False)
-    add_subdirectory(${SFML_ROOT})
-    set(BUILD_SHARED_LIBS ${__SAVED_BUILD_SHARED_LIBS})
-    unset(__SAVED_BUILD_SHARED_LIBS)
-    include_directories(${SFML_ROOT}/include/)
-    list(APPEND IGD_EXTERNAL_LIBS ${SFML_LIBS})
-endif()
+find_package(Qt5Quick)
+find_package(Qt5Core)
+list(APPEND IGD_EXTERNAL_LIBS Qt5::Quick Qt5::Core)
 
 set(GUM_ROOT ${CMAKE_SOURCE_DIR}/thirdparty/gum)
 set(GUM_LIBS gum-static)
@@ -84,9 +76,14 @@ set(IGD_SOURCES
 string_prepend(IGD_SOURCES ${IGD_ROOT} ${IGD_SOURCES})
 include_directories(${CMAKE_SOURCE_DIR})
 
+set(IGD_RCC_RESOURCES
+    qml/res.qrc
+)
+qt5_add_resources(IGD_RCC_SOURCES ${IGD_RCC_RESOURCES})
+
 dump_definitions()
 
-add_executable(isometric ${IGD_SOURCES} ${GLAD_SOURCES})
+add_executable(isometric ${IGD_SOURCES} ${IGD_RCC_SOURCES})
 set_target_properties(isometric PROPERTIES COMPILE_FLAGS ${IGD_CXX_COMPILEFLAGS})
 target_link_libraries(isometric ${IGD_EXTERNAL_LIBS})
 
