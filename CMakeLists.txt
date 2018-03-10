@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.2)
 
 project(isometric)
 
@@ -9,8 +9,10 @@ include(cmake/castella/Platform.cmake)
 include(cmake/castella/String.cmake)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
+set(CMAKE_CXX_STANDARD 14)
 
 log(info "Cmake build type:" ${CMAKE_BUILD_TYPE})
+log(info "C++ standard:" ${CMAKE_CXX_STANDARD})
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
     set(IGD_RELEASE_BUILD False)
@@ -34,7 +36,6 @@ else()
     set(IGD_OPTIMIZE_FOR_SIZE False)
 endif()
 
-set(IGD_CXX_STANDARD_SWITCH "-std=c++14")
 set(IGD_CXX_COMPILER_DIAGNOSTICS_SWITCH "-Wall -Wextra -Wpedantic -Werror")
 
 if(${IGD_OPTIMIZE_FOR_SIZE})
@@ -44,7 +45,6 @@ else()
 endif()
 
 string_join(IGD_CXX_COMPILEFLAGS " "
-    ${IGD_CXX_STANDARD_SWITCH}
     ${IGD_CXX_COMPILER_DIAGNOSTICS_SWITCH}
     ${IGD_CXX_OPTIMIZATION_SWITCH}
 )
