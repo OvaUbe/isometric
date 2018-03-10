@@ -76,9 +76,14 @@ set(IGD_SOURCES
 string_prepend(IGD_SOURCES ${IGD_ROOT} ${IGD_SOURCES})
 include_directories(${CMAKE_SOURCE_DIR})
 
+set(IGD_RCC_RESOURCES
+    qml/res.qrc
+)
+qt5_add_resources(IGD_RCC_SOURCES ${IGD_RCC_RESOURCES})
+
 dump_definitions()
 
-add_executable(isometric ${IGD_SOURCES})
+add_executable(isometric ${IGD_SOURCES} ${IGD_RCC_SOURCES})
 set_target_properties(isometric PROPERTIES COMPILE_FLAGS ${IGD_CXX_COMPILEFLAGS})
 target_link_libraries(isometric ${IGD_EXTERNAL_LIBS})
 
