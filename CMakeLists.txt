@@ -70,19 +70,20 @@ string_join(IGD_EXTERNAL_LIBS_STRING " " ${IGD_EXTERNAL_LIBS})
 log(info "Linking with:" ${IGD_EXTERNAL_LIBS_STRING})
 
 set(IGD_ROOT ${CMAKE_SOURCE_DIR}/isometric/)
-set(IGD_SOURCES
-    main.cpp
-)
-string_prepend(IGD_SOURCES ${IGD_ROOT} ${IGD_SOURCES})
 
 set(IGD_RCC_RESOURCES
     qml/res.qrc
 )
 qt5_add_resources(IGD_RCC_SOURCES ${IGD_RCC_RESOURCES})
 
+set(IGD_SOURCES
+    main.cpp
+)
+string_prepend(IGD_SOURCES ${IGD_ROOT} ${IGD_SOURCES})
+
 dump_definitions()
 
-add_executable(isometric ${IGD_SOURCES} ${IGD_RCC_SOURCES})
+add_executable(isometric ${IGD_RCC_SOURCES} ${IGD_SOURCES})
 set_target_properties(isometric PROPERTIES COMPILE_FLAGS ${IGD_CXX_COMPILEFLAGS})
 target_link_libraries(isometric ${IGD_EXTERNAL_LIBS})
 
