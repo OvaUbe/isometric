@@ -96,3 +96,6 @@ target_link_libraries(isometric ${IGD_EXTERNAL_LIBS})
 
 highlight_matching(${IGD_ROOT}/*.h)
 highlight_matching(${IGD_ROOT}/*.cpp)
+highlight_matching(${IGD_UI_ROOT}/*.h)
+highlight_matching(${IGD_UI_ROOT}/*.cpp)
+highlight_matching(${CMAKE_SOURCE_DIR}/*.qml)
