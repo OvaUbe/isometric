@@ -74,7 +74,6 @@ set(IGD_SOURCES
     main.cpp
 )
 string_prepend(IGD_SOURCES ${IGD_ROOT} ${IGD_SOURCES})
-include_directories(${CMAKE_SOURCE_DIR})
 
 set(IGD_RCC_RESOURCES
     qml/res.qrc
