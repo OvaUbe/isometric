@@ -74,6 +74,8 @@ set(IGD_UI_ROOT ${CMAKE_SOURCE_DIR}/ui/)
 set(IGD_QML_ROOT ${IGD_UI_ROOT}qml/)
 
 set(IGD_UI_SOURCES
+    backend/Launcher.cpp
+    backend/TypeRegistrator.cpp
     main.cpp
 )
 string_prepend(IGD_UI_SOURCES ${IGD_UI_ROOT} ${IGD_UI_SOURCES})

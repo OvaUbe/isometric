@@ -1,12 +1,25 @@
-import QtQuick 2.3
+import QtQuick 2.0
+import QtQuick.Layouts 1.0
+import QtQuick.Controls 1.0
+
+import Backend 1.0
 
 Rectangle {
-    width: 200
-    height: 100
-    color: "red"
-
-    Text {
+    ColumnLayout {
         anchors.centerIn: parent
-        text: "[ A E S T H E T I C S ]"
+
+        Button {
+            text: "New Game"
+
+            onClicked: Backend.launcher.newGame()
+        }
+
+        Button { text: "Settings" }
+
+        Button {
+            text: "Exit"
+
+            onClicked: Qt.quit()
+        }
     }
 }
