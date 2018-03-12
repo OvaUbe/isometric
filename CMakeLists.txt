@@ -76,6 +76,7 @@ set(IGD_QML_ROOT ${IGD_UI_ROOT}qml/)
 set(IGD_UI_SOURCES
     backend/Launcher.cpp
     backend/TypeRegistrator.cpp
+    backend/UiContext.cpp
     main.cpp
 )
 string_prepend(IGD_UI_SOURCES ${IGD_UI_ROOT} ${IGD_UI_SOURCES})

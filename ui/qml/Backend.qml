@@ -4,5 +4,5 @@ import QtQuick 2.0
 import ui.backend.launcher 1.0
 
 Item {
-    property var launcher: Launcher { }
+    property var launcher: global_backend_launcher
 }
