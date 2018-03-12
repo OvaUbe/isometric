@@ -11,6 +11,8 @@ Rectangle {
 
         anchors.fill: parent
 
+        asynchronous: true
+
         source: "MainMenu.qml"
     }
 }
