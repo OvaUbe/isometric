@@ -2,6 +2,7 @@
 <RCC version="1.0">
     <qresource prefix="qml">
         <file>Backend.qml</file>
+        <file>GameView.qml</file>
         <file>MainMenu.qml</file>
         <file>Main.qml</file>
     </qresource>
