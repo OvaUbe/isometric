@@ -1,5 +1,7 @@
 import QtQuick 2.0
 
+import Backend 1.0
+
 Rectangle {
     id: mainWindow
 
@@ -13,6 +15,6 @@ Rectangle {
 
         asynchronous: true
 
-        source: "MainMenu.qml"
+        source: Backend.launcher.isGameActive ? "GameView.qml" : "MainMenu.qml"
     }
 }
