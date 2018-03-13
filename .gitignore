@@ -1,1 +1,4 @@
 *.user
+
+# Mac OS specific garbage
+.DS_Store
