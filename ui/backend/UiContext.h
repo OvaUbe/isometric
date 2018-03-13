@@ -4,7 +4,7 @@
 
 #include <igd/Application.h>
 
-#include <gum/async/TaskQueue.h>
+#include <gum/async/ITaskQueue.h>
 
 namespace ui {
 
@@ -12,7 +12,7 @@ class UiContext {
     igd::app::Application   _application;
 
     QTimer                  _mainTick;
-    gum::TaskQueueRef       _taskQueue;
+    gum::ITaskQueueRef      _taskQueue;
 
 public:
     explicit UiContext();
