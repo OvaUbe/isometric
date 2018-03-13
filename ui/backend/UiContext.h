@@ -12,7 +12,7 @@ class UiContext {
     igd::app::Application   _application;
 
     QTimer                  _mainTick;
-    gum::ITaskQueueRef      _taskQueue;
+    gum::ITaskQueueRef      _worker;
 
 public:
     explicit UiContext();
@@ -21,8 +21,8 @@ public:
         return _application;
     }
 
-    gum::ITaskQueueRef getTaskQueue() const {
-        return _taskQueue;
+    gum::ITaskQueueRef getWorker() const {
+        return _worker;
     }
 };
 GUM_DECLARE_REF(UiContext);

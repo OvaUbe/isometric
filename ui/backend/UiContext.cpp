@@ -6,17 +6,17 @@ namespace ui {
 
 namespace {
 
-gum::ITaskQueueRef createTaskQueue(const QTimer& mainTick) {
-    const gum::TaskQueueRef taskQueue = gum::make_shared_ref<gum::TaskQueue>();
-    QObject::connect(&mainTick, &QTimer::timeout, [=]{ taskQueue->run(); });
-    return taskQueue;
+gum::ITaskQueueRef createWorker(const QTimer& mainTick) {
+    const gum::TaskQueueRef worker = gum::make_shared_ref<gum::TaskQueue>();
+    QObject::connect(&mainTick, &QTimer::timeout, [=]{ worker->run(); });
+    return worker;
 }
 
 }
 
 
 UiContext::UiContext()
-    :   _taskQueue(createTaskQueue(_mainTick)) {
+    :   _worker(createWorker(_mainTick)) {
     _mainTick.start();
 }
 

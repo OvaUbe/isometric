@@ -18,7 +18,7 @@ Launcher::Launcher(const QQmlEngine& qmlEngine, const UiContextRef& uiContext)
         _isGameActive() {
     qmlEngine.rootContext()->setContextProperty("global_backend_launcher", this);
 
-    _launcherConnection = _uiContext->getApplication().getLauncher()->gameStatusChanged().connect(std::bind(&Self::OnGameStatusChanged, this, _1), _uiContext->getTaskQueue());
+    _launcherConnection = _uiContext->getApplication().getLauncher()->gameStatusChanged().connect(std::bind(&Self::OnGameStatusChanged, this, _1), _uiContext->getWorker());
 }
 
 
