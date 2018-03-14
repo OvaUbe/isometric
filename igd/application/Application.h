@@ -1,6 +1,6 @@
 #pragma once
 
-#include <igd/ILauncher.h>
+#include <igd/application/ILauncher.h>
 
 namespace igd {
 namespace app {

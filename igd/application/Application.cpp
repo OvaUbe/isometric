@@ -1,6 +1,6 @@
-#include <igd/Application.h>
+#include <igd/application/Application.h>
 
-#include <igd/Launcher.h>
+#include <igd/application/Launcher.h>
 
 #include <gum/concurrency/Worker.h>
 

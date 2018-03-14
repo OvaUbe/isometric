@@ -1,4 +1,4 @@
-#include <igd/Launcher.h>
+#include <igd/application/Launcher.h>
 
 namespace igd {
 namespace app {

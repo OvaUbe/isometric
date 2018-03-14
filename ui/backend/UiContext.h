@@ -2,7 +2,7 @@
 
 #include <QTimer>
 
-#include <igd/Application.h>
+#include <igd/application/Application.h>
 
 #include <gum/async/ITaskQueue.h>
 
