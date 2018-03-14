@@ -15,15 +15,25 @@ Launcher::Launcher(const IApplication& application)
 
 
 gum::Token Launcher::startGame() {
-    _logger.info() << "startGame()";
-
-    setGameActive(true);
+    _worker->push(gum::make_cancellable([this]{ doStartGame(); }, _lifeToken.get_handle()));
 
     return gum::make_token<gum::FunctionToken>(gum::make_cancellable([this]{ endGame(); }, _lifeToken.get_handle()));
 }
 
 
+void Launcher::doStartGame() {
+    _logger.info() << "startGame()";
+
+    setGameActive(true);
+}
+
+
 void Launcher::endGame() {
+    _worker->push(gum::make_cancellable([this]{ doEndGame(); }, _lifeToken.get_handle()));
+}
+
+
+void Launcher::doEndGame() {
     _logger.info() << "endGame()";
 
     setGameActive(false);

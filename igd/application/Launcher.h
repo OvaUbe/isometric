@@ -25,7 +25,10 @@ public:
     }
 
 private:
+    void doStartGame();
+
     void endGame();
+    void doEndGame();
 
     void setGameActive(bool active);
 };
