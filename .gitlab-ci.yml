@@ -4,7 +4,17 @@ variables:
   GIT_SUBMODULE_STRATEGY: recursive
 
 stages:
+  - codestyle-check
   - build
+
+clang-format:
+  stage: codestyle-check
+  only:
+    - merge-request
+  before_script:
+    - apt-get install -qq -y cmake git findutils clang-format
+  script:
+    - ./scripts/clangformattest.sh
 
 build:
   stage: build
