@@ -3,12 +3,12 @@ image: "gcc:latest"
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
 
+stages:
+  - build
+
 before_script:
   - apt-get update -qq -y --no-install-recommends && apt-get install -y -qq cmake qtbase5-dev qtdeclarative5-dev
   - mkdir build
-
-stages:
-  - build
 
 build:
   stage: build
