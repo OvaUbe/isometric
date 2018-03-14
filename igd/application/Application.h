@@ -8,7 +8,7 @@ namespace app {
 class Application : public virtual IApplication {
     gum::ITaskQueueRef      _worker;
 
-    ILauncherRef            _launcher;
+    ILauncherPtr            _launcher;
 
 public:
     Application();
