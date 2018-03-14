@@ -16,6 +16,8 @@ public:
     Application();
     ~Application();
 
+    gum::ITaskQueueRef getWorker() const;
+
     ILauncherRef getLauncher() const;
 };
 

@@ -2,15 +2,19 @@
 
 #include <igd/Launcher.h>
 
+#include <gum/concurrency/Worker.h>
+
 namespace igd {
 namespace app {
 
 struct Application::Impl {
-    ILauncherRef launcher;
+    gum::ITaskQueueRef      worker;
+    ILauncherRef            launcher;
 
 public:
     Impl()
-        :   launcher(gum::make_shared_ref<Launcher>()) { }
+        :   worker(gum::make_shared_ref<gum::Worker>("igd")),
+            launcher(gum::make_shared_ref<Launcher>()) { }
 };
 
 
@@ -19,6 +23,11 @@ Application::Application()
 
 
 Application::~Application() { }
+
+
+gum::ITaskQueueRef Application::getWorker() const {
+    return _impl->worker;
+}
 
 
 ILauncherRef Application::getLauncher() const {
