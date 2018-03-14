@@ -11,17 +11,20 @@ class Launcher : public virtual ILauncher {
     bool                        _isGameActive;
     gum::Signal<void(bool)>     _gameStatusChanged;
 
+    gum::LifeToken              _lifeToken;
+
 public:
     Launcher();
 
-    void newGame() override;
-    void quitGame() override;
+    gum::Token startGame() override;
 
     gum::SignalHandle<void(bool)> gameStatusChanged() const override {
         return _gameStatusChanged.get_handle();
     }
 
 private:
+    void endGame();
+
     void setGameActive(bool active);
 };
 

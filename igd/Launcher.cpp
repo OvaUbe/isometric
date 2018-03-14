@@ -11,15 +11,17 @@ Launcher::Launcher()
         _gameStatusChanged([this](const auto& slot){ slot(_isGameActive); }) { }
 
 
-void Launcher::newGame() {
-    _logger.info() << "newGame()";
+gum::Token Launcher::startGame() {
+    _logger.info() << "startGame()";
 
     setGameActive(true);
+
+    return gum::make_token<gum::FunctionToken>(gum::make_cancellable([this]{ endGame(); }, _lifeToken.get_handle()));
 }
 
 
-void Launcher::quitGame() {
-    _logger.info() << "quitGame()";
+void Launcher::endGame() {
+    _logger.info() << "endGame()";
 
     setGameActive(false);
 }

@@ -17,6 +17,7 @@ private:
 
     bool            _isGameActive;
 
+    gum::Token      _startGameToken;
     gum::Token      _launcherConnection;
 
 public:

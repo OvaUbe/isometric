@@ -23,12 +23,12 @@ Launcher::Launcher(const QQmlEngine& qmlEngine, const UiContextRef& uiContext)
 
 
 void Launcher::newGame() {
-    _uiContext->getApplication().getLauncher()->newGame();
+    _startGameToken = _uiContext->getApplication().getLauncher()->startGame();
 }
 
 
 void Launcher::quitGame() {
-    _uiContext->getApplication().getLauncher()->quitGame();
+    _startGameToken.release();
 }
 
 

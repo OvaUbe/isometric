@@ -8,8 +8,7 @@ namespace app {
 struct ILauncher {
     virtual ~ILauncher() { }
 
-    virtual void newGame() = 0;
-    virtual void quitGame() = 0;
+    virtual gum::Token startGame() = 0;
 
     virtual gum::SignalHandle<void(bool)> gameStatusChanged() const = 0;
 };
