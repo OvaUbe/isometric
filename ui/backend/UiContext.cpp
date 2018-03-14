@@ -1,5 +1,7 @@
 #include <ui/backend/UiContext.h>
 
+#include <igd/application/Application.h>
+
 #include <gum/async/TaskQueue.h>
 
 namespace ui {
@@ -16,7 +18,8 @@ gum::ITaskQueueRef createWorker(const QTimer& mainTick) {
 
 
 UiContext::UiContext()
-    :   _worker(createWorker(_mainTick)) {
+    :   _application(gum::make_shared_ref<igd::app::Application>()),
+        _worker(createWorker(_mainTick)) {
     _mainTick.start();
 }
 

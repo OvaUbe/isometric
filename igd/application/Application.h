@@ -1,24 +1,25 @@
 #pragma once
 
-#include <igd/application/ILauncher.h>
+#include <igd/application/IApplication.h>
 
 namespace igd {
 namespace app {
 
-struct Application {
-    struct Impl;
-    GUM_DECLARE_UNIQUE_REF(Impl);
+class Application : public virtual IApplication {
+    gum::ITaskQueueRef      _worker;
 
-private:
-    ImplUniqueRef _impl;
+    ILauncherRef            _launcher;
 
 public:
     Application();
-    ~Application();
 
-    gum::ITaskQueueRef getWorker() const;
+    gum::ITaskQueueRef getWorker() const override {
+        return _worker;
+    }
 
-    ILauncherRef getLauncher() const;
+    ILauncherRef getLauncher() const override {
+        return _launcher;
+    }
 };
 
 }

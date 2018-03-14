@@ -2,23 +2,23 @@
 
 #include <QTimer>
 
-#include <igd/application/Application.h>
+#include <igd/application/IApplication.h>
 
 #include <gum/async/ITaskQueue.h>
 
 namespace ui {
 
 class UiContext {
-    igd::app::Application   _application;
+    igd::app::IApplicationRef   _application;
 
-    QTimer                  _mainTick;
-    gum::ITaskQueueRef      _worker;
+    QTimer                      _mainTick;
+    gum::ITaskQueueRef          _worker;
 
 public:
     explicit UiContext();
 
-    const igd::app::Application& getApplication() const {
-        return _application;
+    const igd::app::IApplication& getApplication() const {
+        return *_application;
     }
 
     gum::ITaskQueueRef getWorker() const {
