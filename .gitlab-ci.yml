@@ -3,14 +3,23 @@ image: "gcc:latest"
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
 
-before_script:
-- apt-get update -qq -y --no-install-recommends && apt-get install -y -qq cmake qtbase5-dev qtdeclarative5-dev
-- mkdir build
-
 stages:
-- build
+  - codestyle-check
+  - build
+
+clang-format:
+  stage: codestyle-check
+  only:
+    - merge-request
+  before_script:
+    - apt-get install -qq -y cmake git findutils clang-format
+  script:
+    - ./scripts/clangformattest.sh
 
 build:
-    stage: build
-    script:
-    - cd build && cmake .. && make
+  stage: build
+  before_script:
+    - apt-get update -qq -y --no-install-recommends && apt-get install -y -qq cmake qtbase5-dev qtdeclarative5-dev ninja-build
+    - mkdir build
+  script:
+    - cd build && cmake -G Ninja .. && ninja
