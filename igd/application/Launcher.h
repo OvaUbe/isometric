@@ -6,21 +6,21 @@ namespace igd {
 namespace app {
 
 class Launcher : public virtual ILauncher {
-    static gum::Logger          _logger;
+    static gum::Logger                          _logger;
 
-    bool                        _isGameActive;
-    gum::Signal<void(bool)>     _gameStatusChanged;
+    bool                                        _isGameActive;
+    gum::Signal<GameStatusChangedSignature>     _gameStatusChanged;
 
-    gum::ITaskQueueRef          _worker;
+    gum::ITaskQueueRef                          _worker;
 
-    gum::LifeToken              _lifeToken;
+    gum::LifeToken                              _lifeToken;
 
 public:
     Launcher(const struct IApplication& application);
 
     gum::Token startGame() override;
 
-    gum::SignalHandle<void(bool)> gameStatusChanged() const override {
+    gum::SignalHandle<GameStatusChangedSignature> gameStatusChanged() const override {
         return _gameStatusChanged.get_handle();
     }
 
