@@ -60,6 +60,10 @@ find_package(Qt5Quick)
 find_package(Qt5Core)
 list(APPEND IGD_EXTERNAL_LIBS Qt5::Quick Qt5::Core)
 
+find_package(Boost REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
+list(APPEND IGD_EXTERNAL_LIBS ${Boost_LIBRARIES})
+
 set(GUM_ROOT ${CMAKE_SOURCE_DIR}/thirdparty/gum)
 set(GUM_LIBS gum-static)
 add_subdirectory(${GUM_ROOT})
