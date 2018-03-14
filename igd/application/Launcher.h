@@ -11,10 +11,12 @@ class Launcher : public virtual ILauncher {
     bool                        _isGameActive;
     gum::Signal<void(bool)>     _gameStatusChanged;
 
+    gum::ITaskQueueRef          _worker;
+
     gum::LifeToken              _lifeToken;
 
 public:
-    Launcher();
+    Launcher(const struct IApplication& application);
 
     gum::Token startGame() override;
 

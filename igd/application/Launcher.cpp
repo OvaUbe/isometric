@@ -1,14 +1,17 @@
 #include <igd/application/Launcher.h>
 
+#include <igd/application/IApplication.h>
+
 namespace igd {
 namespace app {
 
 GUM_DEFINE_LOGGER(Launcher);
 
 
-Launcher::Launcher()
+Launcher::Launcher(const IApplication& application)
     :   _isGameActive(),
-        _gameStatusChanged([this](const auto& slot){ slot(_isGameActive); }) { }
+        _gameStatusChanged([this](const auto& slot){ slot(_isGameActive); }),
+        _worker(application.getWorker()) { }
 
 
 gum::Token Launcher::startGame() {
