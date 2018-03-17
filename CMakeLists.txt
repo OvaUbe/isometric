@@ -92,6 +92,7 @@ qt5_add_resources(IGD_RCC_SOURCES ${IGD_RCC_RESOURCES})
 
 set(IGD_SOURCES
     application/Application.cpp
+    application/Environment.cpp
     application/Launcher.cpp
     environment/surface/SurfaceTable.cpp
 )
