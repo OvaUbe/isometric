@@ -9,7 +9,8 @@ GUM_DEFINE_LOGGER(Launcher);
 
 
 Launcher::Launcher(const IApplication& application)
-    :   _worker(application.getWorker()) { }
+    :   _environment(application.getEnvironment()),
+        _worker(application.getWorker()) { }
 
 
 gum::Token Launcher::startGame() {
@@ -22,6 +23,8 @@ gum::Token Launcher::startGame() {
 void Launcher::doStartGame() {
     _logger.info() << "startGame()";
 
+    _environmentToken = _environment->create();
+
     _isGameActive = true;
 }
 
@@ -33,6 +36,8 @@ void Launcher::endGame() {
 
 void Launcher::doEndGame() {
     _logger.info() << "endGame()";
+
+    _environmentToken.release();
 
     _isGameActive = false;
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <igd/application/IEnvironment.h>
 #include <igd/application/ILauncher.h>
 
 #include <gum/ObservableValue.h>
@@ -10,10 +11,13 @@ namespace app {
 class Launcher : public virtual ILauncher {
     static gum::Logger                          _logger;
 
+    IEnvironmentRef                             _environment;
+
     gum::ObservableValue<bool>                  _isGameActive;
 
     gum::ITaskQueueRef                          _worker;
 
+    gum::Token                                  _environmentToken;
     gum::LifeToken                              _lifeToken;
 
 public:
