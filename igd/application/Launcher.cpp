@@ -9,9 +9,7 @@ GUM_DEFINE_LOGGER(Launcher);
 
 
 Launcher::Launcher(const IApplication& application)
-    :   _isGameActive(),
-        _gameStatusChanged([this](const auto& slot){ slot(_isGameActive); }),
-        _worker(application.getWorker()) { }
+    :   _worker(application.getWorker()) { }
 
 
 gum::Token Launcher::startGame() {
@@ -24,7 +22,7 @@ gum::Token Launcher::startGame() {
 void Launcher::doStartGame() {
     _logger.info() << "startGame()";
 
-    setGameActive(true);
+    _isGameActive = true;
 }
 
 
@@ -36,18 +34,7 @@ void Launcher::endGame() {
 void Launcher::doEndGame() {
     _logger.info() << "endGame()";
 
-    setGameActive(false);
-}
-
-
-void Launcher::setGameActive(bool active) {
-    gum::SignalLock l(_gameStatusChanged.get_mutex());
-
-    if (_isGameActive == active)
-        return;
-
-    _isGameActive = active;
-    _gameStatusChanged(_isGameActive);
+    _isGameActive = false;
 }
 
 }

@@ -2,14 +2,15 @@
 
 #include <igd/application/ILauncher.h>
 
+#include <gum/ObservableValue.h>
+
 namespace igd {
 namespace app {
 
 class Launcher : public virtual ILauncher {
     static gum::Logger                          _logger;
 
-    bool                                        _isGameActive;
-    gum::Signal<GameStatusChangedSignature>     _gameStatusChanged;
+    gum::ObservableValue<bool>                  _isGameActive;
 
     gum::ITaskQueueRef                          _worker;
 
@@ -21,7 +22,7 @@ public:
     gum::Token startGame() override;
 
     gum::SignalHandle<GameStatusChangedSignature> gameStatusChanged() const override {
-        return _gameStatusChanged.get_handle();
+        return _isGameActive.changed();
     }
 
 private:
@@ -29,8 +30,6 @@ private:
 
     void endGame();
     void doEndGame();
-
-    void setGameActive(bool active);
 };
 
 }
