@@ -1,4 +1,4 @@
-#include <igd/environment/surface/SurfaceTable.h>
+#include <igd/environment/surface/SurfaceTable.hxx>
 
 #include <gum/Range.h>
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <igd/application/IApplication.h>
+#include <igd/application/IApplication.hxx>
 
 namespace igd {
 namespace app {

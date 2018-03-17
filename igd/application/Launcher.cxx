@@ -1,6 +1,6 @@
-#include <igd/application/Launcher.h>
+#include <igd/application/Launcher.hxx>
 
-#include <igd/application/IApplication.h>
+#include <igd/application/IApplication.hxx>
 
 namespace igd {
 namespace app {

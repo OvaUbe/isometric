@@ -1,6 +1,6 @@
 #pragma once
 
-#include <igd/environment/surface/ISurfaceMap.h>
+#include <igd/environment/surface/ISurfaceMap.hxx>
 
 namespace igd {
 namespace app {

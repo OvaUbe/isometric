@@ -1,6 +1,6 @@
 #pragma once
 
-#include <igd/environment/surface/SurfaceMaterial.h>
+#include <igd/environment/surface/SurfaceMaterial.hxx>
 
 #include <gum/smartpointer/SharedPtr.h>
 #include <gum/smartpointer/SharedReference.h>

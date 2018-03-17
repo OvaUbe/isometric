@@ -1,6 +1,6 @@
-#include <ui/backend/TypeRegistrator.h>
+#include <ui/backend/TypeRegistrator.hxx>
 
-#include <ui/backend/Launcher.h>
+#include <ui/backend/Launcher.hxx>
 
 #include <QQmlEngine>
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <igd/application/IEnvironment.h>
-#include <igd/application/ILauncher.h>
+#include <igd/application/IEnvironment.hxx>
+#include <igd/application/ILauncher.hxx>
 
 #include <gum/ObservableValue.h>
 

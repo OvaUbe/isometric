@@ -1,6 +1,6 @@
-#include <igd/application/Environment.h>
+#include <igd/application/Environment.hxx>
 
-#include <igd/application/IApplication.h>
+#include <igd/application/IApplication.hxx>
 
 #include <gum/container/ObservableSortedMap.h>
 

@@ -1,5 +1,5 @@
-#include <ui/backend/Launcher.h>
-#include <ui/backend/TypeRegistrator.h>
+#include <ui/backend/Launcher.hxx>
+#include <ui/backend/TypeRegistrator.hxx>
 
 #include <QtGui/QGuiApplication>
 #include <QQmlEngine>

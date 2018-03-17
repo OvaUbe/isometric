@@ -1,8 +1,8 @@
 #pragma once
 
-#include <igd/application/IEnvironment.h>
+#include <igd/application/IEnvironment.hxx>
 
-#include <igd/environment/surface/ISurfaceMap.h>
+#include <igd/environment/surface/ISurfaceMap.hxx>
 
 #include <gum/ObservableValue.h>
 

@@ -1,4 +1,4 @@
-#include <ui/backend/Launcher.h>
+#include <ui/backend/Launcher.hxx>
 
 #include <QQmlContext>
 

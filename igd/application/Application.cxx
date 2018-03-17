@@ -1,7 +1,7 @@
-#include <igd/application/Application.h>
+#include <igd/application/Application.hxx>
 
-#include <igd/application/Environment.h>
-#include <igd/application/Launcher.h>
+#include <igd/application/Environment.hxx>
+#include <igd/application/Launcher.hxx>
 
 #include <gum/concurrency/Worker.h>
 

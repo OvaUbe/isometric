@@ -1,7 +1,7 @@
 #pragma once
 
-#include <igd/environment/surface/ISurfaceUnit.h>
-#include <igd/environment/surface/SurfaceDescriptor.h>
+#include <igd/environment/surface/ISurfaceUnit.hxx>
+#include <igd/environment/surface/SurfaceDescriptor.hxx>
 
 #include <gum/container/IObservableMap.h>
 

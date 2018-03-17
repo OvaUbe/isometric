@@ -1,6 +1,6 @@
-#include <ui/backend/UiContext.h>
+#include <ui/backend/UiContext.hxx>
 
-#include <igd/application/Application.h>
+#include <igd/application/Application.hxx>
 
 #include <gum/async/TaskQueue.h>
 

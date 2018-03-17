@@ -2,7 +2,7 @@
 
 #include <QQmlEngine>
 
-#include <ui/backend/UiContext.h>
+#include <ui/backend/UiContext.hxx>
 
 namespace ui {
 
