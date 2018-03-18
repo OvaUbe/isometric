@@ -8,11 +8,10 @@
 namespace igd {
 
 struct ISurfaceUnit {
-    virtual ~ISurfaceUnit() { }
+    virtual ~ISurfaceUnit() {}
 
     virtual const SurfaceMaterial& getMaterial() const = 0;
 };
 GUM_DECLARE_PTR(ISurfaceUnit);
 GUM_DECLARE_REF(ISurfaceUnit);
-
 }

@@ -6,12 +6,12 @@ namespace igd {
 namespace app {
 
 class Application : public virtual IApplication {
-    gum::ITaskQueueRef      _worker;
+    gum::ITaskQueueRef _worker;
 
-    IEnvironmentPtr         _environment;
-    ILauncherPtr            _launcher;
+    IEnvironmentPtr _environment;
+    ILauncherPtr _launcher;
 
-public:
+  public:
     Application();
 
     gum::ITaskQueueRef getWorker() const override {
@@ -26,6 +26,5 @@ public:
         return _launcher;
     }
 };
-
 }
 }

@@ -5,5 +5,4 @@ namespace ui {
 struct TypeRegistrator {
     TypeRegistrator();
 };
-
 }

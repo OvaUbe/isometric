@@ -9,12 +9,12 @@
 namespace ui {
 
 class UiContext {
-    igd::app::IApplicationRef   _application;
+    igd::app::IApplicationRef _application;
 
-    QTimer                      _mainTick;
-    gum::ITaskQueueRef          _worker;
+    QTimer _mainTick;
+    gum::ITaskQueueRef _worker;
 
-public:
+  public:
     explicit UiContext();
 
     const igd::app::IApplication& getApplication() const {
@@ -27,5 +27,4 @@ public:
 };
 GUM_DECLARE_REF(UiContext);
 GUM_DECLARE_PTR(UiContext);
-
 }

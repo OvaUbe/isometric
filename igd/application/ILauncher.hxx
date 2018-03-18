@@ -8,8 +8,8 @@ namespace app {
 struct ILauncher {
     using GameStatusChangedSignature = void(bool);
 
-public:
-    virtual ~ILauncher() { }
+  public:
+    virtual ~ILauncher() {}
 
     virtual gum::Token startGame() = 0;
 
@@ -17,6 +17,5 @@ public:
 };
 GUM_DECLARE_PTR(ILauncher);
 GUM_DECLARE_REF(ILauncher);
-
 }
 }

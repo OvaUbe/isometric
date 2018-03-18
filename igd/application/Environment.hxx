@@ -15,17 +15,17 @@ class Environment : public virtual IEnvironment {
 
     using ObservableSurfaceMap = gum::ObservableValue<IReadonlySurfaceMapPtr, gum::OwnerEquals>;
 
-private:
-    static gum::Logger                                  _logger;
+  private:
+    static gum::Logger _logger;
 
-    ISurfaceMapBundleRef                                _surfaceMapBundle;
-    ObservableSurfaceMap                                _currentSurfaceMap;
+    ISurfaceMapBundleRef _surfaceMapBundle;
+    ObservableSurfaceMap _currentSurfaceMap;
 
-    gum::ITaskQueueRef                                  _worker;
+    gum::ITaskQueueRef _worker;
 
-    gum::LifeToken                                      _lifeToken;
+    gum::LifeToken _lifeToken;
 
-public:
+  public:
     Environment(const struct IApplication& application);
 
     gum::Token create() override;
@@ -38,12 +38,11 @@ public:
         return _currentSurfaceMap.changed();
     }
 
-private:
+  private:
     void doCreate();
 
     void destroy();
     void doDestroy();
 };
-
 }
 }

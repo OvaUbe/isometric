@@ -11,8 +11,8 @@ struct IEnvironment {
 
     using CurrentSurfaceMapChangedSignature = void(const IReadonlySurfaceMapPtr&);
 
-public:
-    virtual ~IEnvironment() { }
+  public:
+    virtual ~IEnvironment() {}
 
     virtual gum::Token create() = 0;
 
@@ -22,6 +22,5 @@ public:
 };
 GUM_DECLARE_PTR(IEnvironment);
 GUM_DECLARE_REF(IEnvironment);
-
 }
 }

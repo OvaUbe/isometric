@@ -12,15 +12,15 @@ class Launcher : public QObject {
     Q_OBJECT
     Q_PROPERTY(bool isGameActive READ isGameActive NOTIFY gameStatusChanged)
 
-private:
-    UiContextPtr    _uiContext;
+  private:
+    UiContextPtr _uiContext;
 
-    bool            _isGameActive;
+    bool _isGameActive;
 
-    gum::Token      _startGameToken;
-    gum::Token      _launcherConnection;
+    gum::Token _startGameToken;
+    gum::Token _launcherConnection;
 
-public:
+  public:
     Launcher(QObject* parent = nullptr);
     Launcher(const QQmlEngine& qmlEngine, const UiContextRef& iuContext);
 
@@ -31,11 +31,10 @@ public:
     Q_INVOKABLE void newGame();
     Q_INVOKABLE void quitGame();
 
-signals:
+  signals:
     void gameStatusChanged();
 
-private:
+  private:
     void OnGameStatusChanged(bool status);
 };
-
 }

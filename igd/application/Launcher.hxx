@@ -9,18 +9,18 @@ namespace igd {
 namespace app {
 
 class Launcher : public virtual ILauncher {
-    static gum::Logger                          _logger;
+    static gum::Logger _logger;
 
-    IEnvironmentRef                             _environment;
+    IEnvironmentRef _environment;
 
-    gum::ObservableValue<bool>                  _isGameActive;
+    gum::ObservableValue<bool> _isGameActive;
 
-    gum::ITaskQueueRef                          _worker;
+    gum::ITaskQueueRef _worker;
 
-    gum::Token                                  _environmentToken;
-    gum::LifeToken                              _lifeToken;
+    gum::Token _environmentToken;
+    gum::LifeToken _lifeToken;
 
-public:
+  public:
     Launcher(const struct IApplication& application);
 
     gum::Token startGame() override;
@@ -29,12 +29,11 @@ public:
         return _isGameActive.changed();
     }
 
-private:
+  private:
     void doStartGame();
 
     void endGame();
     void doEndGame();
 };
-
 }
 }

@@ -8,11 +8,9 @@ struct SurfaceDescriptor {
     gum::u32 x;
     gum::u32 y;
 
-public:
+  public:
     SurfaceDescriptor(gum::u32 x_, gum::u32 y_)
-        :   x(x_),
-            y(y_)
-    { }
+        : x(x_)
+        , y(y_) {}
 };
-
 }

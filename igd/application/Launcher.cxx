@@ -7,18 +7,15 @@ namespace app {
 
 GUM_DEFINE_LOGGER(Launcher);
 
-
 Launcher::Launcher(const IApplication& application)
-    :   _environment(application.getEnvironment()),
-        _worker(application.getWorker()) { }
-
+    : _environment(application.getEnvironment())
+    , _worker(application.getWorker()) {}
 
 gum::Token Launcher::startGame() {
-    _worker->push(gum::make_cancellable([this]{ doStartGame(); }, _lifeToken.get_handle()));
+    _worker->push(gum::make_cancellable([this] { doStartGame(); }, _lifeToken.get_handle()));
 
-    return gum::make_token<gum::FunctionToken>(gum::make_cancellable([this]{ endGame(); }, _lifeToken.get_handle()));
+    return gum::make_token<gum::FunctionToken>(gum::make_cancellable([this] { endGame(); }, _lifeToken.get_handle()));
 }
-
 
 void Launcher::doStartGame() {
     _logger.info() << "startGame()";
@@ -28,11 +25,9 @@ void Launcher::doStartGame() {
     _isGameActive = true;
 }
 
-
 void Launcher::endGame() {
-    _worker->push(gum::make_cancellable([this]{ doEndGame(); }, _lifeToken.get_handle()));
+    _worker->push(gum::make_cancellable([this] { doEndGame(); }, _lifeToken.get_handle()));
 }
-
 
 void Launcher::doEndGame() {
     _logger.info() << "endGame()";
@@ -41,6 +36,5 @@ void Launcher::doEndGame() {
 
     _isGameActive = false;
 }
-
 }
 }
