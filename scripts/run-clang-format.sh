@@ -15,7 +15,7 @@ if ! [[ -z $initial_state ]]; then
 fi
 
 clang_format=`find_clang_format`
-if [[ $? -ne 0 ]]; then echo "clang-format not found"; exit 1; fi
+if [[ $? -ne 0 ]]; then echo "clang-format not found"; exit 0; fi
 clang_format_opts="-style=file -assume-filename=.clang-format -i"
 
 src_dirs=(
