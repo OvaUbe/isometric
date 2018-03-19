@@ -1,12 +1,21 @@
 #!/bin/bash
 
+find_clang_format() {
+    version=6.0
+
+    result=`which clang-format-${version}` && echo ${result} && exit 0
+    result=`which clang-format` && echo ${result} && exit 0
+    exit 1
+}
+
 initial_state=`git status | grep "modified"`
 if ! [[ -z $initial_state ]]; then
     echo "Clang-format script must be applied on a clean git state"
     exit 1
 fi
 
-clang_format=clang-format
+clang_format=`find_clang_format`
+if [[ $? -ne 0 ]]; then echo "clang-format not found"; exit 1; fi
 clang_format_opts="-style=file -assume-filename=.clang-format -i"
 
 src_dirs=(
