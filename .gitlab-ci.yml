@@ -19,7 +19,7 @@ clang-format:
 build:
   stage: build
   before_script:
-    - apt-get update -qq -y --no-install-recommends && apt-get install -y -qq cmake qtbase5-dev qtdeclarative5-dev ninja-build
+    - apt-get update -qq -y --no-install-recommends && apt-get install -y -qq cmake qtbase5-dev qtdeclarative5-dev libboost-dev ninja-build
     - mkdir build
   script:
     - cd build && cmake -G Ninja .. && ninja

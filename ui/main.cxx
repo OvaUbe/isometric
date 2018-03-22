@@ -1,15 +1,14 @@
-#include <ui/backend/Launcher.h>
-#include <ui/backend/TypeRegistrator.h>
+#include <ui/backend/Launcher.hxx>
+#include <ui/backend/TypeRegistrator.hxx>
 
-#include <QtGui/QGuiApplication>
 #include <QQmlEngine>
 #include <QQuickView>
+#include <QtGui/QGuiApplication>
 
-#include <gum/log/sinks/AnsiTerminalLoggerSink.h>
 #include <gum/log/LoggerManager.h>
+#include <gum/log/sinks/AnsiTerminalLoggerSink.h>
 
 using namespace ui;
-
 
 int main(int argc, char** argv) {
     gum::Token terminalLoggerConnection = gum::LoggerManager::get().register_logger_sink(gum::make_shared_ref<gum::AnsiTerminalLoggerSink>());

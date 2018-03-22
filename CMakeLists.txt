@@ -60,6 +60,10 @@ find_package(Qt5Quick)
 find_package(Qt5Core)
 list(APPEND IGD_EXTERNAL_LIBS Qt5::Quick Qt5::Core)
 
+find_package(Boost REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
+list(APPEND IGD_EXTERNAL_LIBS ${Boost_LIBRARIES})
+
 set(GUM_ROOT ${CMAKE_SOURCE_DIR}/thirdparty/gum)
 set(GUM_LIBS gum-static)
 add_subdirectory(${GUM_ROOT})
@@ -74,10 +78,10 @@ set(IGD_UI_ROOT ${CMAKE_SOURCE_DIR}/ui/)
 set(IGD_QML_ROOT ${IGD_UI_ROOT}qml/)
 
 set(IGD_UI_SOURCES
-    backend/Launcher.cpp
-    backend/TypeRegistrator.cpp
-    backend/UiContext.cpp
-    main.cpp
+    backend/Launcher.cxx
+    backend/TypeRegistrator.cxx
+    backend/UiContext.cxx
+    main.cxx
 )
 string_prepend(IGD_UI_SOURCES ${IGD_UI_ROOT} ${IGD_UI_SOURCES})
 
@@ -87,8 +91,10 @@ set(IGD_RCC_RESOURCES
 qt5_add_resources(IGD_RCC_SOURCES ${IGD_RCC_RESOURCES})
 
 set(IGD_SOURCES
-    Application.cpp
-    Launcher.cpp
+    application/Application.cxx
+    application/Environment.cxx
+    application/Launcher.cxx
+    environment/surface/SurfaceTable.cxx
 )
 string_prepend(IGD_SOURCES ${IGD_ROOT} ${IGD_SOURCES})
 
@@ -99,7 +105,7 @@ set_target_properties(isometric PROPERTIES COMPILE_FLAGS ${IGD_CXX_COMPILEFLAGS}
 target_link_libraries(isometric ${IGD_EXTERNAL_LIBS})
 
 highlight_matching(${IGD_ROOT}/*.h)
-highlight_matching(${IGD_ROOT}/*.cpp)
+highlight_matching(${IGD_ROOT}/*.cxx)
 highlight_matching(${IGD_UI_ROOT}/*.h)
-highlight_matching(${IGD_UI_ROOT}/*.cpp)
+highlight_matching(${IGD_UI_ROOT}/*.cxx)
 highlight_matching(${CMAKE_SOURCE_DIR}/*.qml)
