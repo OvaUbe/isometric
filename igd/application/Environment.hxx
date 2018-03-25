@@ -1,7 +1,6 @@
 #pragma once
 
 #include <igd/application/IEnvironment.hxx>
-
 #include <igd/environment/surface/ISurfaceMap.hxx>
 
 #include <gum/ObservableValue.h>
@@ -10,7 +9,7 @@ namespace igd {
 namespace app {
 
 class Environment : public virtual IEnvironment {
-    using ISurfaceMapBundle = gum::IObservableMap<gum::String, IReadonlySurfaceMapRef>;
+    using ISurfaceMapBundle = gum::IObservableMap<LocationId, IReadonlySurfaceMapRef>;
     GUM_DECLARE_REF(ISurfaceMapBundle);
 
     using ObservableSurfaceMap = gum::ObservableValue<IReadonlySurfaceMapPtr, gum::OwnerEquals>;

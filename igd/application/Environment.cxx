@@ -9,7 +9,7 @@ namespace app {
 
 namespace {
 
-using SurfaceMapBundle = gum::ObservableSortedMap<gum::String, IReadonlySurfaceMapRef>;
+using SurfaceMapBundle = gum::ObservableSortedMap<LocationId, IReadonlySurfaceMapRef>;
 }
 
 GUM_DEFINE_LOGGER(Environment);
