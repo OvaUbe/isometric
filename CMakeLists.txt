@@ -94,6 +94,7 @@ set(IGD_SOURCES
     application/Application.cxx
     application/Environment.cxx
     application/Launcher.cxx
+    application/LocationManager.cxx
     environment/surface/SurfaceTable.cxx
 )
 string_prepend(IGD_SOURCES ${IGD_ROOT} ${IGD_SOURCES})
