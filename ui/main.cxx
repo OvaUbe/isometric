@@ -10,9 +10,7 @@
 
 using namespace ui;
 
-int main(int argc, char** argv) {
-    gum::Token terminalLoggerConnection = gum::LoggerManager::get().register_logger_sink(gum::make_shared_ref<gum::AnsiTerminalLoggerSink>());
-
+int do_main(int argc, char** argv) {
     QGuiApplication app(argc, argv);
 
     QQuickView mainView;
@@ -28,4 +26,14 @@ int main(int argc, char** argv) {
     mainView.show();
 
     return app.exec();
+}
+
+int main(int argc, char** argv) {
+    gum::Logger mainLogger("MainLogger");
+
+    gum::Token terminalLoggerConnection = gum::LoggerManager::get().register_logger_sink(gum::make_shared_ref<gum::AnsiTerminalLoggerSink>());
+
+    GUM_TRY_LOGGER("Terminated due to exception", gum::LogLevel::Error, mainLogger, return do_main(argc, argv));
+
+    return 1;
 }
