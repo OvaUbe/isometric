@@ -5,6 +5,7 @@
 #include <QQuickView>
 #include <QtGui/QGuiApplication>
 
+#include <gum/concurrency/Thread.h>
 #include <gum/log/LoggerManager.h>
 #include <gum/log/sinks/AnsiTerminalLoggerSink.h>
 
@@ -29,6 +30,8 @@ int do_main(int argc, char** argv) {
 }
 
 int main(int argc, char** argv) {
+    gum::Thread::set_own_name("ui");
+
     gum::Logger mainLogger("MainLogger");
 
     gum::Token terminalLoggerConnection = gum::LoggerManager::get().register_logger_sink(gum::make_shared_ref<gum::AnsiTerminalLoggerSink>());
