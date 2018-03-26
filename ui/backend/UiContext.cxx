@@ -1,23 +1,12 @@
 #include <ui/backend/UiContext.hxx>
 
-#include <igd/application/Application.hxx>
+#include <ui/backend/MainLoopQueue.hxx>
 
-#include <gum/async/TaskQueue.h>
+#include <igd/application/Application.hxx>
 
 namespace ui {
 
-namespace {
-
-gum::ITaskQueueRef createWorker(const QTimer& mainTick) {
-    const gum::TaskQueueRef worker = gum::make_shared_ref<gum::TaskQueue>();
-    QObject::connect(&mainTick, &QTimer::timeout, [=] { worker->run(); });
-    return worker;
-}
-}
-
-UiContext::UiContext()
+UiContext::UiContext(QObject* context)
     : _application(gum::make_shared_ref<igd::app::Application>())
-    , _worker(createWorker(_mainTick)) {
-    _mainTick.start();
-}
+    , _worker(gum::make_shared_ref<MainLoopQueue>(context)) {}
 }

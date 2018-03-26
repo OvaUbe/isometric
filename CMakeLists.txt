@@ -79,6 +79,7 @@ set(IGD_QML_ROOT ${IGD_UI_ROOT}qml/)
 
 set(IGD_UI_SOURCES
     backend/Launcher.cxx
+    backend/MainLoopQueue.cxx
     backend/TypeRegistrator.cxx
     backend/UiContext.cxx
     main.cxx

@@ -20,7 +20,7 @@ int do_main(int argc, char** argv) {
 
     TypeRegistrator typeRegistrator;
 
-    const UiContextRef uiContext = gum::make_shared_ref<UiContext>();
+    const UiContextRef uiContext = gum::make_shared_ref<UiContext>(&app);
     Launcher launcher(qmlEngine, uiContext);
 
     mainView.setSource(QUrl::fromLocalFile(":/qml/Main.qml"));
