@@ -8,8 +8,9 @@ namespace ui {
 
 using namespace std::placeholders;
 
-Launcher::Launcher(QObject* parent)
-    : QObject(parent) {}
+Launcher::Launcher(QObject*) {
+    GUM_THROW(gum::NotImplementedException());
+}
 
 Launcher::Launcher(const QQmlEngine& qmlEngine, const UiContextRef& uiContext)
     : _uiContext(uiContext)
