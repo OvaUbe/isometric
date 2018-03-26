@@ -22,7 +22,7 @@ class Launcher : public QObject {
 
   public:
     Launcher(QObject* parent = nullptr);
-    Launcher(const QQmlEngine& qmlEngine, const UiContextRef& iuContext);
+    Launcher(const QQmlEngine& qmlEngine, const UiContextRef& uiContext);
 
     Q_INVOKABLE bool isGameActive() const {
         return _isGameActive;
