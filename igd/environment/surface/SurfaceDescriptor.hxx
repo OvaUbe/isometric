@@ -1,16 +1,8 @@
 #pragma once
 
-#include <gum/Types.h>
+#include <igd/core/Geometry.hxx>
 
 namespace igd {
 
-struct SurfaceDescriptor {
-    gum::u32 x;
-    gum::u32 y;
-
-  public:
-    SurfaceDescriptor(gum::u32 x_, gum::u32 y_)
-        : x(x_)
-        , y(y_) {}
-};
+using SurfaceDescriptor = Position<2>;
 }

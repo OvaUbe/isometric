@@ -1,6 +1,7 @@
 #include <igd/application/Environment.hxx>
 
 #include <igd/application/IApplication.hxx>
+#include <igd/core/Core.hxx>
 
 #include <gum/container/ObservableSortedMap.h>
 #include <gum/maybe/Maybe.h>
@@ -50,7 +51,7 @@ void Environment::doDestroy() {
     _locationTokens.reset();
 
     _currentLocationId.reset();
-    _currentLocation = nullptr;
+    _currentLocation = null;
     _locationBundle->clear();
 }
 
@@ -67,7 +68,7 @@ void Environment::onLocationBundleChanged(gum::MapOp op, const LocationId& id, c
     case gum::MapOp::Removed:
         _locationBundle->remove(id);
         if (isCurrentLocationId)
-            _currentLocation = nullptr;
+            _currentLocation = null;
         break;
     }
 }

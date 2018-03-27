@@ -87,6 +87,6 @@ SurfaceDescriptor SurfaceTable::makeDescriptor(size_t index) const {
 }
 
 size_t SurfaceTable::indexOf(const SurfaceDescriptor& surfaceDescriptor) const {
-    return _width * surfaceDescriptor.y + surfaceDescriptor.x;
+    return _width * surfaceDescriptor.y() + surfaceDescriptor.x();
 }
 }
