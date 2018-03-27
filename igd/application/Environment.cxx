@@ -12,7 +12,7 @@ namespace app {
 
 namespace {
 
-using SurfaceMapBundle = gum::ObservableSortedMap<LocationId, IReadonlySurfaceMapRef>;
+using LocationBundle = gum::ObservableSortedMap<LocationId, IReadonlyLocationRef>;
 
 using namespace std::placeholders;
 }
@@ -21,7 +21,7 @@ GUM_DEFINE_LOGGER(Environment);
 
 Environment::Environment(const IApplication& application)
     : _locationManager(application.getLocationManager())
-    , _surfaceMapBundle(gum::make_shared_ref<SurfaceMapBundle>())
+    , _locationBundle(gum::make_shared_ref<LocationBundle>())
     , _worker(application.getWorker())
     , _lifeTokenReleaser(gum::make_token<gum::FunctionToken>([this] { _lifeToken.release(); })) {}
 
@@ -50,8 +50,8 @@ void Environment::doDestroy() {
     _locationTokens.reset();
 
     _currentLocationId.reset();
-    _currentSurfaceMap = nullptr;
-    _surfaceMapBundle->clear();
+    _currentLocation = nullptr;
+    _locationBundle->clear();
 }
 
 void Environment::onLocationBundleChanged(gum::MapOp op, const LocationId& id, const ILocationRef& location) {
@@ -60,14 +60,14 @@ void Environment::onLocationBundleChanged(gum::MapOp op, const LocationId& id, c
     switch (op) {
     case gum::MapOp::Added:
     case gum::MapOp::Updated:
-        _surfaceMapBundle->set(id, location->getSurfaceMap());
+        _locationBundle->set(id, location);
         if (isCurrentLocationId)
-            _currentSurfaceMap = location->getSurfaceMap();
+            _currentLocation = location;
         break;
     case gum::MapOp::Removed:
-        _surfaceMapBundle->remove(id);
+        _locationBundle->remove(id);
         if (isCurrentLocationId)
-            _currentSurfaceMap = nullptr;
+            _currentLocation = nullptr;
         break;
     }
 }

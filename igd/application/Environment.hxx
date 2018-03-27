@@ -13,19 +13,19 @@ namespace app {
 class Environment : public virtual IEnvironment {
     using Self = Environment;
 
-    using ISurfaceMapBundle = gum::IObservableMap<LocationId, IReadonlySurfaceMapRef>;
-    GUM_DECLARE_REF(ISurfaceMapBundle);
+    using ILocationBundle = gum::IObservableMap<LocationId, IReadonlyLocationRef>;
+    GUM_DECLARE_REF(ILocationBundle);
 
-    using ObservableSurfaceMap = gum::ObservableValue<IReadonlySurfaceMapPtr, gum::OwnerEquals>;
+    using ObservableLocation = gum::ObservableValue<IReadonlyLocationPtr, gum::OwnerEquals>;
 
   private:
     static gum::Logger _logger;
 
     ILocationManagerRef _locationManager;
 
-    ISurfaceMapBundleRef _surfaceMapBundle;
+    ILocationBundleRef _locationBundle;
     gum::Optional<LocationId> _currentLocationId;
-    ObservableSurfaceMap _currentSurfaceMap;
+    ObservableLocation _currentLocation;
 
     gum::ITaskQueueRef _worker;
 
@@ -40,12 +40,12 @@ class Environment : public virtual IEnvironment {
 
     gum::Token create() override;
 
-    IReadonlySurfaceMapBundleRef getSurfaceMapBundle() const override {
-        return _surfaceMapBundle;
+    IReadonlyLocationBundleRef getLocationBundle() const override {
+        return _locationBundle;
     }
 
-    gum::SignalHandle<CurrentSurfaceMapChangedSignature> currentSurfaceMapChanged() const override {
-        return _currentSurfaceMap.changed();
+    gum::SignalHandle<CurrentLocationChangedSignature> currentLocationChanged() const override {
+        return _currentLocation.changed();
     }
 
   private:

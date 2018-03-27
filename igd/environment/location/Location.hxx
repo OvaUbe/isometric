@@ -11,7 +11,11 @@ class Location : public virtual ILocation {
     Location(const ISurfaceMapRef& surfaceMap)
         : _surfaceMap(surfaceMap) {}
 
-    ISurfaceMapRef getSurfaceMap() const {
+    IReadonlySurfaceMapRef getReadonlySurfaceMap() const override {
+        return _surfaceMap;
+    }
+
+    ISurfaceMapRef getSurfaceMap() const override {
         return _surfaceMap;
     }
 };
