@@ -4,16 +4,45 @@ import QtQuick.Controls 1.0
 
 import Backend 1.0
 
+import "isometry" as Isometry
+
 Rectangle {
-    ColumnLayout {
-        anchors.left: parent.left
+    id: root
 
-        Button { text: "Settings" }
+    color: "black"
 
-        Button {
-            text: "Quit to Main Menu"
+    Flickable {
+        contentHeight: surfaceView.height
+        contentWidth: surfaceView.width
 
-            onClicked: Backend.launcher.quitGame()
+        anchors.fill: parent
+
+        Isometry.SurfaceView {
+            id: surfaceView
+
+            forwardAngle: 60
+            sideAngle: 45
+            delegateSide: 100
+
+            width: model.tableColumnCount * cellWidth
+            height: model.tableRowCount * cellHeight
+
+            model: Backend.environment.surfaceModel
+
+            delegate: Isometry.SurfaceDelegate {
+                forwardAngle: surfaceView.forwardAngle
+                sideAngle: surfaceView.sideAngle
+
+                sideSize: surfaceView.delegateSide
+                tableColumnCount: surfaceView.model.tableColumnCount
+
+                color: display ? "white" : "black"
+
+                border.color: "black"
+                border.width: 2
+
+                Text { text: "Material:\n" + display }
+            }
         }
     }
 }

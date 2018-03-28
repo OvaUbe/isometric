@@ -1,6 +1,9 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
     <qresource prefix="qml">
+        <file>isometry/SurfaceDelegate.qml</file>
+        <file>isometry/SurfaceView.qml</file>
+        <file>isometry/Tile.qml</file>
         <file>Backend.qml</file>
         <file>GamePage.qml</file>
         <file>MainMenu.qml</file>
