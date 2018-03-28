@@ -81,6 +81,7 @@ set(IGD_UI_ROOT ${CMAKE_SOURCE_DIR}/ui/)
 set(IGD_QML_ROOT ${IGD_UI_ROOT}qml/)
 
 set(IGD_UI_SOURCES
+    backend/models/SurfaceModel.cxx
     backend/Launcher.cxx
     backend/MainLoopQueue.cxx
     backend/TypeRegistrator.cxx
