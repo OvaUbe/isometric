@@ -64,6 +64,9 @@ find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 list(APPEND IGD_EXTERNAL_LIBS ${Boost_LIBRARIES})
 
+find_package(Eigen REQUIRED)
+include_directories(${EIGEN_INCLUDE_DIRS})
+
 set(GUM_ROOT ${CMAKE_SOURCE_DIR}/thirdparty/gum)
 set(GUM_LIBS gum-static)
 add_subdirectory(${GUM_ROOT})
