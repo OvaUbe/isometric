@@ -1,3 +1,4 @@
+#include <ui/backend/Environment.hxx>
 #include <ui/backend/Launcher.hxx>
 #include <ui/backend/TypeRegistrator.hxx>
 
@@ -22,6 +23,7 @@ int do_main(int argc, char** argv) {
 
     const UiContextRef uiContext = gum::make_shared_ref<UiContext>(&app);
     Launcher launcher(qmlEngine, uiContext);
+    Environment environment(qmlEngine, uiContext);
 
     mainView.setSource(QUrl::fromLocalFile(":/qml/Main.qml"));
     mainView.show();
