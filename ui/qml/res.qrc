@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/qml">
+        <file>components/BlurredPopup.qml</file>
         <file>isometry/SurfaceDelegate.qml</file>
         <file>isometry/SurfaceView.qml</file>
         <file>isometry/Tile.qml</file>
