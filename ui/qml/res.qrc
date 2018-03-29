@@ -1,6 +1,5 @@
-<!DOCTYPE RCC>
-<RCC version="1.0">
-    <qresource prefix="qml">
+<RCC>
+    <qresource prefix="/qml">
         <file>isometry/SurfaceDelegate.qml</file>
         <file>isometry/SurfaceView.qml</file>
         <file>isometry/Tile.qml</file>
