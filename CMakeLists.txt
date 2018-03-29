@@ -95,6 +95,7 @@ set(IGD_RCC_RESOURCES
     ${IGD_QML_ROOT}/res.qrc
 )
 qt5_add_resources(IGD_RCC_SOURCES ${IGD_RCC_RESOURCES})
+set_property(SOURCE qrc_res.cpp PROPERTY SKIP_AUTOMOC ON)
 
 set(IGD_SOURCES
     application/Application.cxx
