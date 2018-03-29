@@ -13,7 +13,7 @@ Rectangle {
 
         anchors.fill: parent
 
-        asynchronous: true
+        asynchronous: false
 
         source: Backend.launcher.isGameActive ? "GamePage.qml" : "MainMenu.qml"
     }
