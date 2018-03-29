@@ -12,36 +12,49 @@ Rectangle {
     color: "black"
 
     Flickable {
-        contentHeight: surfaceView.height
-        contentWidth: surfaceView.width
+        contentHeight: surfaceViewFrame.height
+        contentWidth: surfaceViewFrame.width
 
         anchors.fill: parent
 
-        Isometry.SurfaceView {
-            id: surfaceView
+        Rectangle {
+            id: surfaceViewFrame
 
-            forwardAngle: 60
-            sideAngle: 45
-            delegateSide: 100
+            property int margin: 3 * surfaceView.delegateSide
 
-            width: model.tableColumnCount * cellWidth
-            height: model.tableRowCount * cellHeight
+            color: root.color
 
-            model: Backend.environment.surfaceModel
+            width: surfaceView.width + 2 * margin
+            height: surfaceView.height + 2 * margin
 
-            delegate: Isometry.SurfaceDelegate {
-                forwardAngle: surfaceView.forwardAngle
-                sideAngle: surfaceView.sideAngle
+            Isometry.SurfaceView {
+                id: surfaceView
 
-                sideSize: surfaceView.delegateSide
-                tableColumnCount: surfaceView.model.tableColumnCount
+                forwardAngle: 60
+                sideAngle: 45
+                delegateSide: 100
 
-                color: display ? "white" : "black"
+                anchors.centerIn: parent
 
-                border.color: "black"
-                border.width: 2
+                width: model.tableColumnCount * cellWidth
+                height: model.tableRowCount * cellHeight
 
-                Text { text: "Material:\n" + display }
+                model: Backend.environment.surfaceModel
+
+                delegate: Isometry.SurfaceDelegate {
+                    forwardAngle: surfaceView.forwardAngle
+                    sideAngle: surfaceView.sideAngle
+
+                    sideSize: surfaceView.delegateSide
+                    tableColumnCount: surfaceView.model.tableColumnCount
+
+                    color: display ? "white" : "black"
+
+                    border.color: "black"
+                    border.width: 2
+
+                    Text { text: "Material:\n" + display }
+                }
             }
         }
     }
