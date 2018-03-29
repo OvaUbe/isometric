@@ -64,6 +64,9 @@ find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 list(APPEND IGD_EXTERNAL_LIBS ${Boost_LIBRARIES})
 
+find_package(Eigen REQUIRED)
+include_directories(${EIGEN_INCLUDE_DIRS})
+
 set(GUM_ROOT ${CMAKE_SOURCE_DIR}/thirdparty/gum)
 set(GUM_LIBS gum-static)
 add_subdirectory(${GUM_ROOT})
@@ -78,7 +81,10 @@ set(IGD_UI_ROOT ${CMAKE_SOURCE_DIR}/ui/)
 set(IGD_QML_ROOT ${IGD_UI_ROOT}qml/)
 
 set(IGD_UI_SOURCES
+    backend/models/SurfaceModel.cxx
+    backend/Environment.cxx
     backend/Launcher.cxx
+    backend/MainLoopQueue.cxx
     backend/TypeRegistrator.cxx
     backend/UiContext.cxx
     main.cxx
@@ -89,11 +95,13 @@ set(IGD_RCC_RESOURCES
     ${IGD_QML_ROOT}/res.qrc
 )
 qt5_add_resources(IGD_RCC_SOURCES ${IGD_RCC_RESOURCES})
+set_property(SOURCE qrc_res.cpp PROPERTY SKIP_AUTOMOC ON)
 
 set(IGD_SOURCES
     application/Application.cxx
     application/Environment.cxx
     application/Launcher.cxx
+    application/LocationManager.cxx
     environment/surface/SurfaceTable.cxx
 )
 string_prepend(IGD_SOURCES ${IGD_ROOT} ${IGD_SOURCES})

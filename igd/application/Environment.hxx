@@ -1,41 +1,51 @@
 #pragma once
 
 #include <igd/application/IEnvironment.hxx>
-
+#include <igd/application/ILocationManager.hxx>
 #include <igd/environment/surface/ISurfaceMap.hxx>
 
 #include <gum/ObservableValue.h>
+#include <gum/token/TokenPool.h>
 
 namespace igd {
 namespace app {
 
 class Environment : public virtual IEnvironment {
-    using ISurfaceMapBundle = gum::IObservableMap<gum::String, IReadonlySurfaceMapRef>;
-    GUM_DECLARE_REF(ISurfaceMapBundle);
+    using Self = Environment;
 
-    using ObservableSurfaceMap = gum::ObservableValue<IReadonlySurfaceMapPtr, gum::OwnerEquals>;
+    using ILocationBundle = gum::IObservableMap<LocationId, IReadonlyLocationRef>;
+    GUM_DECLARE_REF(ILocationBundle);
+
+    using ObservableLocation = gum::ObservableValue<IReadonlyLocationPtr, gum::OwnerEquals>;
 
   private:
     static gum::Logger _logger;
 
-    ISurfaceMapBundleRef _surfaceMapBundle;
-    ObservableSurfaceMap _currentSurfaceMap;
+    ILocationManagerRef _locationManager;
+
+    ILocationBundleRef _locationBundle;
+    gum::Optional<LocationId> _currentLocationId;
+    ObservableLocation _currentLocation;
 
     gum::ITaskQueueRef _worker;
 
     gum::LifeToken _lifeToken;
+
+    gum::TokenPool _locationTokens;
+    gum::Token _locationBundleConnection;
+    gum::Token _lifeTokenReleaser;
 
   public:
     Environment(const struct IApplication& application);
 
     gum::Token create() override;
 
-    IReadonlySurfaceMapBundleRef getSurfaceMapBundle() const override {
-        return _surfaceMapBundle;
+    IReadonlyLocationBundleRef getLocationBundle() const override {
+        return _locationBundle;
     }
 
-    gum::SignalHandle<CurrentSurfaceMapChangedSignature> currentSurfaceMapChanged() const override {
-        return _currentSurfaceMap.changed();
+    gum::SignalHandle<CurrentLocationChangedSignature> currentLocationChanged() const override {
+        return _currentLocation.changed();
     }
 
   private:
@@ -43,6 +53,8 @@ class Environment : public virtual IEnvironment {
 
     void destroy();
     void doDestroy();
+
+    void onLocationBundleChanged(gum::MapOp op, const LocationId& id, const ILocationRef& location);
 };
 }
 }

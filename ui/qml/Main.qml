@@ -15,6 +15,6 @@ Rectangle {
 
         asynchronous: true
 
-        source: Backend.launcher.isGameActive ? "GameView.qml" : "MainMenu.qml"
+        source: Backend.launcher.isGameActive ? "GamePage.qml" : "MainMenu.qml"
     }
 }

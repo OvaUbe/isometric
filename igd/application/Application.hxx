@@ -8,11 +8,16 @@ namespace app {
 class Application : public virtual IApplication {
     gum::ITaskQueueRef _worker;
 
+    ILocationManagerPtr _locationManager;
     IEnvironmentPtr _environment;
     ILauncherPtr _launcher;
 
   public:
     Application();
+
+    ILocationManagerRef getLocationManager() const override {
+        return _locationManager;
+    }
 
     gum::ITaskQueueRef getWorker() const override {
         return _worker;
