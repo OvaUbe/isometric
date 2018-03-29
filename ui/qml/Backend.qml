@@ -1,6 +1,6 @@
 pragma Singleton
 
-import QtQuick 2.0
+import QtQuick 2.9
 import ui.backend.launcher 1.0
 import ui.backend.environment 1.0
 
