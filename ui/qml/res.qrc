@@ -4,6 +4,8 @@
         <file>isometry/SurfaceDelegate.qml</file>
         <file>isometry/SurfaceView.qml</file>
         <file>isometry/Tile.qml</file>
+        <file>styles/debug/LocationStyle.qml</file>
+        <file>styles/debug/SurfaceTile.qml</file>
         <file>Backend.qml</file>
         <file>GamePage.qml</file>
         <file>MainMenu.qml</file>

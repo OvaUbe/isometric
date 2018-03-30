@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 import QtGraphicalEffects 1.0
 
 import Backend 1.0
+import styles.LocationStyle 1.0
 
 import "components" as Components
 import "isometry" as Isometry
@@ -13,7 +14,7 @@ Rectangle {
 
     focus: true
 
-    color: "black"
+    color: LocationStyle.spaceColor
 
     Flickable {
         contentHeight: surfaceViewFrame.height
@@ -46,18 +47,14 @@ Rectangle {
                 model: Backend.environment.surfaceModel
 
                 delegate: Isometry.SurfaceDelegate {
+                    isHidden: display ? false : true
+                    materialName: display ? display : ""
+
                     forwardAngle: surfaceView.forwardAngle
                     sideAngle: surfaceView.sideAngle
 
                     sideSize: surfaceView.delegateSide
                     tableColumnCount: surfaceView.model.tableColumnCount
-
-                    color: display ? "white" : "black"
-
-                    border.color: "black"
-                    border.width: 2
-
-                    Text { text: "Material:\n" + display }
                 }
             }
         }
