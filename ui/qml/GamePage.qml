@@ -56,6 +56,8 @@ Rectangle {
                     sideSize: surfaceView.delegateSide
                     row: Math.floor(model.index / surfaceView.model.tableColumnCount)
                     column: Math.floor(model.index % surfaceView.model.tableColumnCount)
+                    cellWidth: surfaceView.cellWidth
+                    cellHeight: surfaceView.cellHeight
                 }
             }
         }

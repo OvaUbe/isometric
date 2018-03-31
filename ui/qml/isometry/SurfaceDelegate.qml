@@ -6,6 +6,8 @@ Isometry.Tile {
     property int sideSize
     property int row
     property int column
+    property int cellWidth
+    property int cellHeight
 
     function toRadians(angle) {
         return angle * (Math.PI / 180);
@@ -13,8 +15,6 @@ Isometry.Tile {
 
     property real forwardAngleRadians: toRadians(forwardAngle)
     property real sideAngleRadians: toRadians(sideAngle)
-
-    property int cellWidth: sideSize / Math.cos(sideAngleRadians)
 
     property bool isOddRow: (row % 2) == 1
     property int isometricOffset: isOddRow ? (cellWidth / 2) : 0
