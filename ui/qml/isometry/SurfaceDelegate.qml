@@ -4,7 +4,8 @@ import "." as Isometry
 
 Isometry.Tile {
     property int sideSize: 0
-    property int tableColumnCount: 0
+    property int row: 0
+    property int column: 0
 
     function toRadians(angle) {
         return angle * (Math.PI / 180);
@@ -15,9 +16,8 @@ Isometry.Tile {
 
     property int cellWidth: sideSize / Math.cos(sideAngleRadians)
 
-    property bool isOddRow: (Math.floor(model.index / tableColumnCount) % 2) == 1
+    property bool isOddRow: (row % 2) == 1
     property int isometricOffset: isOddRow ? (cellWidth / 2) : 0
-    property int positionInARow: model.index % tableColumnCount
 
     width: sideSize
     height: sideSize
@@ -27,7 +27,7 @@ Isometry.Tile {
         var savedPreventRecursiveXUpdate = preventRecursiveXUpdate
         preventRecursiveXUpdate = !preventRecursiveXUpdate
         if (savedPreventRecursiveXUpdate)
-            x = positionInARow * cellWidth + isometricOffset
+            x = column * cellWidth + isometricOffset
     }
 
     onXChanged: setX()

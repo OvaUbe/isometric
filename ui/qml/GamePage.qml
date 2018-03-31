@@ -54,7 +54,8 @@ Rectangle {
                     sideAngle: surfaceView.sideAngle
 
                     sideSize: surfaceView.delegateSide
-                    tableColumnCount: surfaceView.model.tableColumnCount
+                    row: Math.floor(model.index / surfaceView.model.tableColumnCount)
+                    column: Math.floor(model.index % surfaceView.model.tableColumnCount)
                 }
             }
         }
