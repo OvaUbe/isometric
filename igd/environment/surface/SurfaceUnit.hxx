@@ -8,8 +8,8 @@ class SurfaceUnit : public virtual ISurfaceUnit {
     SurfaceMaterial _material;
 
   public:
-    SurfaceUnit(SurfaceMaterial&& materual)
-        : _material(std::move(materual)) {}
+    SurfaceUnit(SurfaceMaterial&& material)
+        : _material(std::move(material)) {}
 
     const SurfaceMaterial& getMaterial() const override {
         return _material;
