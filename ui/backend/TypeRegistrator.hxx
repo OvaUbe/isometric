@@ -1,8 +1,10 @@
 #pragma once
 
+#include <QString>
+
 namespace ui {
 
 struct TypeRegistrator {
-    TypeRegistrator();
+    TypeRegistrator(const QString& chosenStyle);
 };
 }

@@ -72,9 +72,7 @@ int registerSingleton(const gum::StringLiteral& typeName) {
 #define UI_DETAIL_REGISTER_SINGLETON_STYLE(Source_, Type_, Ns_, ChosenNs_) UI_DETAIL_DO_REGISTER_STYLE(registerSingleton, Source_, Type_, Ns_, ChosenNs_)
 }
 
-TypeRegistrator::TypeRegistrator() {
-    const QString chosenStyle = "debug";
-
+TypeRegistrator::TypeRegistrator(const QString& chosenStyle) {
     registerSingleton("qrc:/qml/Backend.qml", "Backend");
 
     UI_DETAIL_REGISTER_SINGLETON_STYLE("qrc:/qml/styles/debug/LocationStyle.qml", "LocationStyle", "debug", chosenStyle);
