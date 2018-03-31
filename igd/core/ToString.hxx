@@ -7,7 +7,7 @@
 
 namespace gum {
 
-template <typename Unit_, size_t Rows_, size_t Columns_>
+template <typename Unit_, int Rows_, int Columns_>
 struct StringRepresentableTrait<Eigen::Matrix<Unit_, Rows_, Columns_>, std::enable_if_t<Columns_ != 1>> : std::true_type {
     static String to_string(const Eigen::Matrix<Unit_, Rows_, Columns_>& matrix) {
         String result;
@@ -31,7 +31,7 @@ struct StringRepresentableTrait<Eigen::Matrix<Unit_, Rows_, Columns_>, std::enab
     }
 };
 
-template <typename Unit_, size_t Rows_, size_t Columns_>
+template <typename Unit_, int Rows_, int Columns_>
 struct StringRepresentableTrait<Eigen::Matrix<Unit_, Rows_, Columns_>, std::enable_if_t<Columns_ == 1>> : std::true_type {
     static String to_string(const Eigen::Matrix<Unit_, Rows_, Columns_>& matrix) {
         String result;
