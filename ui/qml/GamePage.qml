@@ -25,7 +25,7 @@ Rectangle {
         Rectangle {
             id: surfaceViewFrame
 
-            property int margin: 3 * surfaceView.delegateSide
+            property int margin: 3 * surfaceView.cellSide
 
             color: root.color
 
@@ -37,27 +37,26 @@ Rectangle {
 
                 forwardAngle: 60
                 sideAngle: 45
-                delegateSide: 100
+                cellSide: 100
 
                 anchors.centerIn: parent
-
-                width: model.tableColumnCount * cellWidth
-                height: model.tableRowCount * cellHeight
 
                 model: Backend.environment.surfaceModel
 
                 delegate: Isometry.SurfaceDelegate {
+                    property int row: surfaceView.computeCellRow(index)
+                    property int column: surfaceView.computeCellColumn(index)
+
                     isHidden: display ? false : true
                     materialName: display ? display : ""
 
                     forwardAngle: surfaceView.forwardAngle
                     sideAngle: surfaceView.sideAngle
 
-                    sideSize: surfaceView.delegateSide
-                    row: Math.floor(model.index / surfaceView.model.tableColumnCount)
-                    column: Math.floor(model.index % surfaceView.model.tableColumnCount)
-                    cellWidth: surfaceView.cellWidth
-                    cellHeight: surfaceView.cellHeight
+                    sideSize: surfaceView.cellSide
+
+                    realX: surfaceView.computeCellX(row, column)
+                    realY: surfaceView.computeCellY(row, column)
                 }
             }
         }
