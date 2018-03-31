@@ -1,8 +1,6 @@
 import QtQuick 2.9
 
-import styles.SurfaceTile 1.0
-
-SurfaceTile {
+Rectangle {
     id: isometricTile
 
     property real forwardAngle

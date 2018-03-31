@@ -1,8 +1,8 @@
 import QtQuick 2.9
 
-import "." as Isometry
+import styles.SurfaceTile 1.0
 
-Isometry.Tile {
+SurfaceTile {
     property int sideSize
 
     property int realX

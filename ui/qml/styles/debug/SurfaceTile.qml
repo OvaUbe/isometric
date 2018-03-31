@@ -1,8 +1,9 @@
 import QtQuick 2.0
 
 import styles.debug.LocationStyle 1.0
+import "../../isometry" as Isometry
 
-Rectangle {
+Isometry.Tile {
     property bool isHidden
     property string materialName
 
