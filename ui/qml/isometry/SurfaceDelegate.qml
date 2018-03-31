@@ -3,9 +3,9 @@ import QtQuick 2.9
 import "." as Isometry
 
 Isometry.Tile {
-    property int sideSize: 0
-    property int row: 0
-    property int column: 0
+    property int sideSize
+    property int row
+    property int column
 
     function toRadians(angle) {
         return angle * (Math.PI / 180);

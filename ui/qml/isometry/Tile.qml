@@ -5,8 +5,8 @@ import styles.SurfaceTile 1.0
 SurfaceTile {
     id: isometricTile
 
-    property real forwardAngle: 0
-    property real sideAngle: 0
+    property real forwardAngle
+    property real sideAngle
 
     transform: [
         Rotation {

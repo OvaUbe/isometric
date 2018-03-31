@@ -1,9 +1,9 @@
 import QtQuick 2.9
 
 GridView {
-    property real forwardAngle: 0
-    property real sideAngle: 0
-    property int delegateSide: 0
+    property real forwardAngle
+    property real sideAngle
+    property int delegateSide
 
     function toRadians(angle) {
         return angle * (Math.PI / 180);
