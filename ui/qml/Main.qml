@@ -1,12 +1,13 @@
 import QtQuick 2.9
+import QtQuick.Window 2.1
 
 import Backend 1.0
 
 Rectangle {
     id: mainWindow
 
-    width: 1024
-    height: 768
+    width: Window.width
+    height: Window.height
 
     Loader {
         id: pageLoader
