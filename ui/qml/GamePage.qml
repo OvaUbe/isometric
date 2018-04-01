@@ -42,8 +42,8 @@ Rectangle {
                 property int row: surfaceView.computeCellRow(index)
                 property int column: surfaceView.computeCellColumn(index)
 
-                isHidden: display ? false : true
-                materialName: display ? display : ""
+                isHidden: model.display ? false : true
+                materialName: model.materialName ? model.materialName : ""
 
                 forwardAngle: surfaceView.forwardAngle
                 sideAngle: surfaceView.sideAngle

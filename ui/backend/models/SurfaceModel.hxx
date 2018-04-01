@@ -16,6 +16,8 @@ class SurfaceModel : public QAbstractTableModel {
     Q_PROPERTY(int tableRowCount READ tableRowCount NOTIFY tableRowCountChanged)
     Q_PROPERTY(int tableColumnCount READ tableColumnCount NOTIFY tableColumnCountChanged)
 
+    GUM_ENUM(CustomRoles, MaterialName = Qt::UserRole + 1);
+
     using Cell = gum::Optional<gum::String>;
     using Table = std::vector<Cell>;
 
@@ -25,6 +27,8 @@ class SurfaceModel : public QAbstractTableModel {
 
     Table _table;
 
+    QHash<int, QByteArray> _roleNames;
+
   public:
     SurfaceModel(QObject* parent = nullptr);
 
@@ -32,6 +36,10 @@ class SurfaceModel : public QAbstractTableModel {
     int columnCount(const QModelIndex& parent = QModelIndex()) const override;
 
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+
+    QHash<int, QByteArray> roleNames() const override {
+        return _roleNames;
+    }
 
     Q_INVOKABLE int tableRowCount() const {
         return _rowCount;
