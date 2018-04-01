@@ -17,47 +17,41 @@ Rectangle {
     color: LocationStyle.spaceColor
 
     Flickable {
-        contentHeight: surfaceViewFrame.height
-        contentWidth: surfaceViewFrame.width
+        contentHeight: surfaceView.height
+        contentWidth: surfaceView.width
 
         anchors.fill: parent
 
-        Rectangle {
-            id: surfaceViewFrame
+        rightMargin: 3 * surfaceView.cellWidth
+        leftMargin: 3 * surfaceView.cellWidth
+        topMargin: 3 * surfaceView.cellHeight
+        bottomMargin: 3 * surfaceView.cellHeight
 
-            property int margin: 3 * surfaceView.cellSide
+        Isometry.SurfaceView {
+            id: surfaceView
 
-            color: root.color
+            forwardAngle: 60
+            sideAngle: 45
+            cellSide: 100
 
-            width: surfaceView.width + 2 * margin
-            height: surfaceView.height + 2 * margin
+            anchors.centerIn: parent
 
-            Isometry.SurfaceView {
-                id: surfaceView
+            model: Backend.environment.surfaceModel
 
-                forwardAngle: 60
-                sideAngle: 45
-                cellSide: 100
+            delegate: Isometry.SurfaceDelegate {
+                property int row: surfaceView.computeCellRow(index)
+                property int column: surfaceView.computeCellColumn(index)
 
-                anchors.centerIn: parent
+                isHidden: display ? false : true
+                materialName: display ? display : ""
 
-                model: Backend.environment.surfaceModel
+                forwardAngle: surfaceView.forwardAngle
+                sideAngle: surfaceView.sideAngle
 
-                delegate: Isometry.SurfaceDelegate {
-                    property int row: surfaceView.computeCellRow(index)
-                    property int column: surfaceView.computeCellColumn(index)
+                sideSize: surfaceView.cellSide
 
-                    isHidden: display ? false : true
-                    materialName: display ? display : ""
-
-                    forwardAngle: surfaceView.forwardAngle
-                    sideAngle: surfaceView.sideAngle
-
-                    sideSize: surfaceView.cellSide
-
-                    realX: surfaceView.computeCellX(row, column)
-                    realY: surfaceView.computeCellY(row, column)
-                }
+                realX: surfaceView.computeCellX(row, column)
+                realY: surfaceView.computeCellY(row, column)
             }
         }
     }
