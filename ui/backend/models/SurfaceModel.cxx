@@ -17,7 +17,11 @@ struct MaterialVisitor : public boost::static_visitor<gum::String> {
 SurfaceModel::SurfaceModel(QObject* parent)
     : QAbstractTableModel(parent)
     , _rowCount()
-    , _columnCount() {}
+    , _columnCount() {
+    _roleNames.insert(Qt::DisplayRole, "display");
+
+    _roleNames.insert(CustomRoles::MaterialName, "materialName");
+}
 
 int SurfaceModel::rowCount(const QModelIndex& parent) const {
     if (parent.isValid())
@@ -38,6 +42,8 @@ QVariant SurfaceModel::data(const QModelIndex& index, int role) const {
         .and_([&](const auto& material) {
             switch (role) {
             case Qt::DisplayRole:
+                return QVariant(true);
+            case CustomRoles::MaterialName:
                 return QVariant(material.c_str());
             default:
                 return QVariant();

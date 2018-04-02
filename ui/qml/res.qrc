@@ -1,9 +1,11 @@
-<!DOCTYPE RCC>
-<RCC version="1.0">
-    <qresource prefix="qml">
+<RCC>
+    <qresource prefix="/qml">
+        <file>components/BlurredPopup.qml</file>
         <file>isometry/SurfaceDelegate.qml</file>
         <file>isometry/SurfaceView.qml</file>
         <file>isometry/Tile.qml</file>
+        <file>styles/debug/LocationStyle.qml</file>
+        <file>styles/debug/SurfaceTile.qml</file>
         <file>Backend.qml</file>
         <file>GamePage.qml</file>
         <file>MainMenu.qml</file>

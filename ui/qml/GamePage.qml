@@ -1,61 +1,86 @@
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Layouts 1.0
-import QtQuick.Controls 1.0
+import QtQuick.Controls 2.2
+import QtGraphicalEffects 1.0
 
 import Backend 1.0
+import styles.LocationStyle 1.0
 
+import "components" as Components
 import "isometry" as Isometry
 
 Rectangle {
     id: root
 
-    color: "black"
+    focus: true
+
+    color: LocationStyle.spaceColor
 
     Flickable {
-        contentHeight: surfaceViewFrame.height
-        contentWidth: surfaceViewFrame.width
+        contentHeight: surfaceView.height
+        contentWidth: surfaceView.width
 
         anchors.fill: parent
 
-        Rectangle {
-            id: surfaceViewFrame
+        rightMargin: 3 * surfaceView.cellWidth
+        leftMargin: 3 * surfaceView.cellWidth
+        topMargin: 3 * surfaceView.cellHeight
+        bottomMargin: 3 * surfaceView.cellHeight
 
-            property int margin: 3 * surfaceView.delegateSide
+        Isometry.SurfaceView {
+            id: surfaceView
 
-            color: root.color
+            forwardAngle: 60
+            sideAngle: 45
+            cellSide: 100
 
-            width: surfaceView.width + 2 * margin
-            height: surfaceView.height + 2 * margin
+            anchors.centerIn: parent
 
-            Isometry.SurfaceView {
-                id: surfaceView
+            model: Backend.environment.surfaceModel
 
-                forwardAngle: 60
-                sideAngle: 45
-                delegateSide: 100
+            delegate: Isometry.SurfaceDelegate {
+                property int row: surfaceView.computeCellRow(index)
+                property int column: surfaceView.computeCellColumn(index)
 
-                anchors.centerIn: parent
+                isHidden: model.display ? false : true
+                materialName: model.materialName ? model.materialName : ""
 
-                width: model.tableColumnCount * cellWidth
-                height: model.tableRowCount * cellHeight
+                forwardAngle: surfaceView.forwardAngle
+                sideAngle: surfaceView.sideAngle
 
-                model: Backend.environment.surfaceModel
+                sideSize: surfaceView.cellSide
 
-                delegate: Isometry.SurfaceDelegate {
-                    forwardAngle: surfaceView.forwardAngle
-                    sideAngle: surfaceView.sideAngle
-
-                    sideSize: surfaceView.delegateSide
-                    tableColumnCount: surfaceView.model.tableColumnCount
-
-                    color: display ? "white" : "black"
-
-                    border.color: "black"
-                    border.width: 2
-
-                    Text { text: "Material:\n" + display }
-                }
+                realX: surfaceView.computeCellX(row, column)
+                realY: surfaceView.computeCellY(row, column)
             }
         }
     }
+
+    Components.BlurredPopup {
+        id: menuPopup
+
+        width: parent.width
+        height: parent.height
+
+        blur: 20
+
+        contentItem: ColumnLayout {
+            anchors.fill: parent
+
+            Label {
+                text: '<b>Isometric</b>'
+
+                Layout.alignment: Qt.AlignCenter
+            }
+            Button {
+                text: 'Quit to menu'
+
+                Layout.alignment: Qt.AlignCenter
+
+                onClicked: Backend.launcher.quitGame()
+            }
+        }
+    }
+
+    Keys.onEscapePressed: menuPopup.visible = !menuPopup.visible
 }

@@ -4,9 +4,9 @@
 
 namespace igd {
 
-template <size_t Size_>
+template <int Size_>
 using Size = Eigen::Matrix<size_t, Size_, 1>;
 
-template <size_t Size_>
+template <int Size_>
 using Position = Eigen::Matrix<size_t, Size_, 1>;
 }

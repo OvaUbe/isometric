@@ -1,7 +1,9 @@
 #include <ui/backend/Environment.hxx>
 #include <ui/backend/Launcher.hxx>
 #include <ui/backend/TypeRegistrator.hxx>
+#include <ui/backend/core/ToString.hxx>
 
+#include <QCommandLineParser>
 #include <QQmlEngine>
 #include <QQuickView>
 #include <QtGui/QGuiApplication>
@@ -12,14 +14,29 @@
 
 using namespace ui;
 
+namespace {
+
+QString getCommandLineOption(const QCommandLineParser& parser, const QString& option) {
+    const QString value = parser.value(option);
+    GUM_CHECK(!value.isEmpty(), gum::String() << option << " option was not specified");
+    return value;
+}
+}
+
 int do_main(int argc, char** argv) {
     QGuiApplication app(argc, argv);
+
+    QCommandLineParser parser;
+    parser.setApplicationDescription("Isometric");
+    parser.addHelpOption();
+    parser.addOption({"style", "Custom ui style directory.", "style", "debug"});
+    parser.process(app);
 
     QQuickView mainView;
     QQmlEngine& qmlEngine = *mainView.engine();
     QObject::connect(&qmlEngine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
 
-    TypeRegistrator typeRegistrator;
+    TypeRegistrator typeRegistrator(getCommandLineOption(parser, "style"));
 
     const UiContextRef uiContext = gum::make_shared_ref<UiContext>(&app);
     Launcher launcher(qmlEngine, uiContext);

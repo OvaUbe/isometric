@@ -1,10 +1,10 @@
-import QtQuick 2.0
+import QtQuick 2.9
 
 Rectangle {
     id: isometricTile
 
-    property real forwardAngle: 0
-    property real sideAngle: 0
+    property real forwardAngle
+    property real sideAngle
 
     transform: [
         Rotation {

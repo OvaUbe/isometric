@@ -1,36 +1,18 @@
-import QtQuick 2.0
+import QtQuick 2.9
 
-import "." as Isometry
+import styles.SurfaceTile 1.0
 
-Isometry.Tile {
-    property int sideSize: 0
-    property int tableColumnCount: 0
+SurfaceTile {
+    property int sideSize
 
-    function toRadians(angle) {
-        return angle * (Math.PI / 180);
-    }
+    property int realX
+    property int realY
 
-    property real forwardAngleRadians: toRadians(forwardAngle)
-    property real sideAngleRadians: toRadians(sideAngle)
-
-    property int cellWidth: sideSize / Math.cos(sideAngleRadians)
-
-    property bool isOddRow: (Math.floor(model.index / tableColumnCount) % 2) == 1
-    property int isometricOffset: isOddRow ? (cellWidth / 2) : 0
-    property int positionInARow: model.index % tableColumnCount
+    x: realX
+    onXChanged: x = Qt.binding(function() { return realX; })
+    y: realY
+    onYChanged: y = Qt.binding(function() { return realY; })
 
     width: sideSize
     height: sideSize
-
-    property bool preventRecursiveXUpdate: true
-    function setX() {
-        var savedPreventRecursiveXUpdate = preventRecursiveXUpdate
-        preventRecursiveXUpdate = !preventRecursiveXUpdate
-        if (savedPreventRecursiveXUpdate)
-            x = positionInARow * cellWidth + isometricOffset
-    }
-
-    onXChanged: setX()
-
-    Component.onCompleted: setX()
 }

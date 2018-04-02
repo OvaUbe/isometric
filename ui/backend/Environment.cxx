@@ -1,5 +1,7 @@
 #include <ui/backend/Environment.hxx>
 
+#include <igd/core/ToString.hxx>
+
 #include <QQmlContext>
 
 #include <functional>
@@ -37,7 +39,7 @@ void Environment::OnCurrentLocation(const igd::IReadonlyLocationPtr& currentLoca
 }
 
 void Environment::OnCurrentSurfaceSizeChanged(const igd::SurfaceSize& surfaceSize) {
-    _logger.info() << "OnCurrentSurfaceSizeChanged([" << surfaceSize.x() << ", " << surfaceSize.y() << "])";
+    _logger.info() << "OnCurrentSurfaceSizeChanged(" << surfaceSize << ")";
 
     _surfaceModel->resize(surfaceSize);
 }
