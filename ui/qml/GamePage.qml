@@ -34,6 +34,9 @@ Rectangle {
             sideAngle: 45
             cellSide: 100
 
+            levelHeight: 30
+            wallLevel: 6
+
             anchors.centerIn: parent
 
             model: Backend.environment.surfaceModel
@@ -44,6 +47,8 @@ Rectangle {
 
                 worldX: surfaceView.computeCellX(row, column)
                 worldY: surfaceView.computeCellY(row, column)
+
+                tileHeight: model.display ? surfaceView.computeCellHeight(model.level) : 0
 
                 isHidden: model.display ? false : true
                 materialName: model.display ? model.materialName : ""

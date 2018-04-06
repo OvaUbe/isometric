@@ -6,8 +6,22 @@ SurfaceTile {
     property int worldX
     property int worldY
 
-    x: worldX
-    y: worldY
-    onXChanged: x = Qt.binding(function() { return worldX; })
-    onYChanged: y = Qt.binding(function() { return worldY; })
+    property int tileHeight
+
+    x: calculateX()
+    y: calculateY()
+    onXChanged: x = Qt.binding(function() { return calculateX(); })
+    onYChanged: y = Qt.binding(function() { return calculateY(); })
+
+    function toRadians(angle) {
+        return angle * (Math.PI / 180);
+    }
+
+    function calculateX() {
+        return worldX
+    }
+
+    function calculateY() {
+        return worldY - (tileHeight * Math.sin(toRadians(forwardAngle)))
+    }
 }

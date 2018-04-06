@@ -5,6 +5,9 @@ GridView {
     property real sideAngle
     property int cellSide
 
+    property int levelHeight
+    property int wallLevel
+
     function toRadians(angle) {
         return angle * (Math.PI / 180);
     }
@@ -25,6 +28,10 @@ GridView {
 
     function computeCellX(row, column) { return (leftWidth - row * cellLeftWidth) + (column * cellRightWidth); }
     function computeCellY(row, column) { return row * cellTopHeight + column * cellBottomHeight; }
+
+    function computeCellHeight(level) {
+        return levelHeight * ((level !== undefined) ? level : wallLevel)
+    }
 
     cellWidth: cellLeftWidth + cellRightWidth
     cellHeight: cellTopHeight + cellBottomHeight
