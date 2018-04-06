@@ -21,6 +21,7 @@ SurfaceModel::SurfaceModel(QObject* parent)
     _roleNames.insert(Qt::DisplayRole, "display");
 
     _roleNames.insert(CustomRoles::MaterialName, "materialName");
+    _roleNames.insert(CustomRoles::Level, "level");
 }
 
 int SurfaceModel::rowCount(const QModelIndex& parent) const {
@@ -44,6 +45,10 @@ QVariant SurfaceModel::data(const QModelIndex& index, int role) const {
         return QVariant(true);
     case CustomRoles::MaterialName:
         return boost::apply_visitor(MaterialVisitor(), surfaceUnit->getMaterial());
+    case CustomRoles::Level:
+        if (const auto level = surfaceUnit->getLevel())
+            return (int)*level;
+        return QVariant();
     default:
         return QVariant();
     }

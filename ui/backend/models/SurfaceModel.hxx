@@ -16,7 +16,7 @@ class SurfaceModel : public QAbstractTableModel {
     Q_PROPERTY(int tableRowCount READ tableRowCount NOTIFY tableRowCountChanged)
     Q_PROPERTY(int tableColumnCount READ tableColumnCount NOTIFY tableColumnCountChanged)
 
-    GUM_ENUM(CustomRoles, MaterialName = Qt::UserRole + 1);
+    GUM_ENUM(CustomRoles, MaterialName = Qt::UserRole + 1, Level);
 
     using Cell = igd::ISurfaceUnitPtr;
     using Table = std::vector<Cell>;
