@@ -24,10 +24,7 @@ SurfaceModel::SurfaceModel(QObject* parent)
 }
 
 int SurfaceModel::rowCount(const QModelIndex& parent) const {
-    if (parent.isValid())
-        return 0;
-
-    return _table.size();
+    return parent.isValid() ? 0 : _table.size();
 }
 
 int SurfaceModel::columnCount(const QModelIndex& parent) const {
