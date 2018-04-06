@@ -46,7 +46,7 @@ Rectangle {
                 worldY: surfaceView.computeCellY(row, column)
 
                 isHidden: model.display ? false : true
-                materialName: model.materialName ? model.materialName : ""
+                materialName: model.display ? model.materialName : ""
 
                 panelSide: surfaceView.cellSide
 
