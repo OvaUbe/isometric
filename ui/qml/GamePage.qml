@@ -6,8 +6,8 @@ import QtGraphicalEffects 1.0
 import Backend 1.0
 import styles.LocationStyle 1.0
 
-import "components" as Components
-import "isometry" as Isometry
+import "qrc:/qml/components" as Components
+import "qrc:/qml/isometry" as Isometry
 
 Rectangle {
     id: root

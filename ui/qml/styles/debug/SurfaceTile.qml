@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 import styles.debug.LocationStyle 1.0
-import "../../isometry" as Isometry
+import "qrc:/qml/isometry" as Isometry
 
 Isometry.Tile {
     property bool isHidden
