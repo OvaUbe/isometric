@@ -45,10 +45,10 @@ Rectangle {
                 isHidden: model.display ? false : true
                 materialName: model.materialName ? model.materialName : ""
 
+                panelSide: surfaceView.cellSide
+
                 forwardAngle: surfaceView.forwardAngle
                 sideAngle: surfaceView.sideAngle
-
-                sideSize: surfaceView.cellSide
 
                 realX: surfaceView.computeCellX(row, column)
                 realY: surfaceView.computeCellY(row, column)
