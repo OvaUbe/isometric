@@ -35,7 +35,7 @@ Rectangle {
             cellSide: 100
 
             levelHeight: 30
-            wallLevel: 6
+            maximumWallLevel: 6
 
             anchors.centerIn: parent
 

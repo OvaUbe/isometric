@@ -6,11 +6,13 @@ GridView {
     property int cellSide
 
     property int levelHeight
-    property int wallLevel
+    property int maximumWallLevel
 
     function toRadians(angle) {
         return angle * (Math.PI / 180);
     }
+
+    property int maximumWallHeight: levelHeight * maximumWallLevel
 
     property real forwardAngleRadians: toRadians(forwardAngle)
     property real sideAngleRadians: toRadians(sideAngle)
@@ -36,16 +38,16 @@ GridView {
     }
 
     function computeCellY(row, column) {
-        return row * cellTopHeight + column * cellBottomHeight;
+        return maximumWallHeight + row * cellTopHeight + column * cellBottomHeight;
     }
 
     function computeCellHeight(level) {
-        return levelHeight * ((level !== undefined) ? level : wallLevel)
+        return levelHeight * ((level !== undefined) ? level : maximumWallLevel)
     }
 
     cellWidth: cellLeftWidth + cellRightWidth
     cellHeight: cellTopHeight + cellBottomHeight
 
     width: leftWidth + rightWidth
-    height: cellTopHeight * model.tableRowCount + cellBottomHeight * model.tableColumnCount
+    height: maximumWallHeight + cellTopHeight * model.tableRowCount + cellBottomHeight * model.tableColumnCount
 }
