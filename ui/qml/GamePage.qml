@@ -42,6 +42,9 @@ Rectangle {
                 property int row: surfaceView.computeCellRow(index)
                 property int column: surfaceView.computeCellColumn(index)
 
+                worldX: surfaceView.computeCellX(row, column)
+                worldY: surfaceView.computeCellY(row, column)
+
                 isHidden: model.display ? false : true
                 materialName: model.materialName ? model.materialName : ""
 
@@ -49,9 +52,6 @@ Rectangle {
 
                 forwardAngle: surfaceView.forwardAngle
                 sideAngle: surfaceView.sideAngle
-
-                realX: surfaceView.computeCellX(row, column)
-                realY: surfaceView.computeCellY(row, column)
             }
         }
     }
