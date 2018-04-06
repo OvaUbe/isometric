@@ -18,7 +18,7 @@ class SurfaceModel : public QAbstractTableModel {
 
     GUM_ENUM(CustomRoles, MaterialName = Qt::UserRole + 1);
 
-    using Cell = gum::Optional<gum::String>;
+    using Cell = igd::ISurfaceUnitPtr;
     using Table = std::vector<Cell>;
 
   private:

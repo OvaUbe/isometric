@@ -6,10 +6,10 @@ namespace ui {
 
 namespace {
 
-struct MaterialVisitor : public boost::static_visitor<gum::String> {
+struct MaterialVisitor : public boost::static_visitor<QVariant> {
     template <typename Material_>
-    gum::String operator()(const Material_& material) const {
-        return material.getName().to_string();
+    QVariant operator()(const Material_& material) const {
+        return material.getName().c_str();
     }
 };
 }
@@ -35,19 +35,18 @@ QVariant SurfaceModel::data(const QModelIndex& index, int role) const {
     if (!index.isValid())
         return QVariant();
 
-    return gum::maybe(_table[tableIndexFromIndex(index)])
-        .and_([&](const auto& material) {
-            switch (role) {
-            case Qt::DisplayRole:
-                return QVariant(true);
-            case CustomRoles::MaterialName:
-                return QVariant(material.c_str());
-            default:
-                return QVariant();
-            }
-        })
-        .or_bind(QVariant())
-        .unwrap();
+    const auto surfaceUnit = _table[tableIndexFromIndex(index)];
+    if (!surfaceUnit)
+        return QVariant();
+
+    switch (role) {
+    case Qt::DisplayRole:
+        return QVariant(true);
+    case CustomRoles::MaterialName:
+        return boost::apply_visitor(MaterialVisitor(), surfaceUnit->getMaterial());
+    default:
+        return QVariant();
+    }
 }
 
 void SurfaceModel::resize(const igd::SurfaceSize& surfaceSize) {
@@ -69,7 +68,7 @@ void SurfaceModel::set(const igd::SurfaceDescriptor& surfaceDescriptor, const ig
     const QModelIndex index = indexFromSurfaceDescriptor(surfaceDescriptor);
     const size_t tableIndex = tableIndexFromIndex(index);
 
-    _table[tableIndex] = boost::apply_visitor(MaterialVisitor(), surfaceUnit->getMaterial());
+    _table[tableIndex] = surfaceUnit;
     emit dataChanged(index, index);
 }
 
