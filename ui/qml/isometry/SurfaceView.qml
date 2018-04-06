@@ -23,11 +23,21 @@ GridView {
     property int leftWidth: cellLeftWidth * model.tableRowCount
     property int rightWidth: cellRightWidth * model.tableColumnCount
 
-    function computeCellRow(index) { return (model.tableColumnCount !== 0) ? Math.floor(index / model.tableColumnCount) : 0  }
-    function computeCellColumn(index) { return (model.tableColumnCount !== 0) ? Math.floor(index % model.tableColumnCount) : 0  }
+    function computeCellRow(index) {
+        return (model.tableColumnCount !== 0) ? Math.floor(index / model.tableColumnCount) : 0
+    }
 
-    function computeCellX(row, column) { return (leftWidth - row * cellLeftWidth) + (column * cellRightWidth); }
-    function computeCellY(row, column) { return row * cellTopHeight + column * cellBottomHeight; }
+    function computeCellColumn(index) {
+        return (model.tableColumnCount !== 0) ? Math.floor(index % model.tableColumnCount) : 0
+    }
+
+    function computeCellX(row, column) {
+        return (leftWidth - row * cellLeftWidth) + (column * cellRightWidth);
+    }
+
+    function computeCellY(row, column) {
+        return row * cellTopHeight + column * cellBottomHeight;
+    }
 
     function computeCellHeight(level) {
         return levelHeight * ((level !== undefined) ? level : wallLevel)
