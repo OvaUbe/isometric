@@ -3,7 +3,6 @@
         <file>components/BlurredPopup.qml</file>
         <file>components/Parallelogram.qml</file>
         <file>components/Triangle.qml</file>
-        <file>isometry/SurfaceDelegate.qml</file>
         <file>isometry/SurfaceView.qml</file>
         <file>isometry/Tile.qml</file>
         <file>styles/debug/LocationStyle.qml</file>

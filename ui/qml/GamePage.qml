@@ -5,6 +5,7 @@ import QtGraphicalEffects 1.0
 
 import Backend 1.0
 import styles.LocationStyle 1.0
+import styles.SurfaceTile 1.0
 
 import "qrc:/qml/components" as Components
 import "qrc:/qml/isometry" as Isometry
@@ -41,22 +42,34 @@ Rectangle {
 
             model: Backend.environment.surfaceModel
 
-            delegate: Isometry.SurfaceDelegate {
+            delegate: Item {
                 property int row: surfaceView.computeCellRow(index)
                 property int column: surfaceView.computeCellColumn(index)
 
-                worldX: surfaceView.computeCellX(row, column)
-                worldY: surfaceView.computeCellY(row, column)
+                x: calculateX()
+                y: calculateY()
+                onXChanged: x = Qt.binding(calculateX)
+                onYChanged: y = Qt.binding(calculateY)
 
-                tileHeight: model.display ? surfaceView.computeCellHeight(model.level) : 0
+                function calculateX() {
+                    return surfaceView.computeCellX(row, column)
+                }
 
-                isHidden: model.display ? false : true
-                materialName: model.display ? model.materialName : ""
+                function calculateY() {
+                    return surfaceView.computeCellY(row, column)
+                }
 
-                panelSide: surfaceView.cellSide
+                SurfaceTile {
+                    y: model.display ? -surfaceView.computeCellHeight(model.level) : 0
 
-                forwardAngle: surfaceView.forwardAngle
-                sideAngle: surfaceView.sideAngle
+                    isHidden: model.display ? false : true
+                    materialName: model.display ? model.materialName : ""
+
+                    panelSide: surfaceView.cellSide
+
+                    forwardAngle: surfaceView.forwardAngle
+                    sideAngle: surfaceView.sideAngle
+                }
             }
         }
     }
