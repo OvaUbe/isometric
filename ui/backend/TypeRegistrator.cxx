@@ -78,8 +78,8 @@ TypeRegistrator::TypeRegistrator(const QString& chosenStyle) {
     UI_DETAIL_REGISTER_SINGLETON_STYLE("qrc:/qml/styles/debug/LocationStyle.qml", "LocationStyle", "debug", chosenStyle);
     UI_DETAIL_REGISTER_STYLE("qrc:/qml/styles/debug/SurfaceTile.qml", "SurfaceTile", "debug", chosenStyle);
 
-    registerType<ui::Launcher>("Launcher", "backend.Launcher");
-    registerType<ui::Environment>("Environment", "backend.Environment");
+    registerType<Launcher>("Launcher", "backend.Launcher");
+    registerType<Environment>("Environment", "backend.Environment");
 }
 
 #undef UI_DETAIL_DO_REGISTER_STYLE
