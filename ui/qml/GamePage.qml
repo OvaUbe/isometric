@@ -62,7 +62,7 @@ Rectangle {
                 SurfaceTile {
                     y: model.display ? -surfaceView.computeCellHeight(model.level) : 0
 
-                    isHidden: model.display ? false : true
+                    visible: model.display ? true : false
                     materialName: model.display ? model.materialName : ""
 
                     panelSide: surfaceView.cellSide
