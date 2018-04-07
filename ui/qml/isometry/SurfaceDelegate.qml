@@ -13,15 +13,11 @@ SurfaceTile {
     onXChanged: x = Qt.binding(calculateX)
     onYChanged: y = Qt.binding(calculateY)
 
-    function toRadians(angle) {
-        return angle * (Math.PI / 180);
-    }
-
     function calculateX() {
         return worldX
     }
 
     function calculateY() {
-        return worldY - (tileHeight * Math.sin(toRadians(forwardAngle)))
+        return worldY - tileHeight
     }
 }

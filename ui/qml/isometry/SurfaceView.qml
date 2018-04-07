@@ -42,7 +42,7 @@ GridView {
     }
 
     function computeCellHeight(level) {
-        return levelHeight * ((level !== undefined) ? level : maximumWallLevel)
+        return (levelHeight * ((level !== undefined) ? level : maximumWallLevel)) * Math.sin(forwardAngleRadians)
     }
 
     cellWidth: cellLeftWidth + cellRightWidth
