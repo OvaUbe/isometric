@@ -10,8 +10,8 @@ SurfaceTile {
 
     x: calculateX()
     y: calculateY()
-    onXChanged: x = Qt.binding(function() { return calculateX(); })
-    onYChanged: y = Qt.binding(function() { return calculateY(); })
+    onXChanged: x = Qt.binding(calculateX)
+    onYChanged: y = Qt.binding(calculateY)
 
     function toRadians(angle) {
         return angle * (Math.PI / 180);
