@@ -17,13 +17,13 @@ GridView {
     property real forwardAngleRadians: toRadians(forwardAngle)
     property real sideAngleRadians: toRadians(sideAngle)
 
-    property real cellLeftWidth: cellSide * Math.sin(sideAngleRadians)
-    property real cellRightWidth: cellSide * Math.cos(sideAngleRadians)
-    property real cellTopHeight: cellRightWidth * Math.cos(forwardAngleRadians)
-    property real cellBottomHeight: cellLeftWidth * Math.cos(forwardAngleRadians)
+    property real cellRightWidth: cellSide * Math.sin(sideAngleRadians)
+    property real cellLeftWidth: cellSide * Math.cos(sideAngleRadians)
+    property real cellTopHeight: cellLeftWidth * Math.cos(forwardAngleRadians)
+    property real cellBottomHeight: cellRightWidth * Math.cos(forwardAngleRadians)
 
-    property int leftWidth: cellLeftWidth * model.tableRowCount
-    property int rightWidth: cellRightWidth * model.tableColumnCount
+    property int leftWidth: cellRightWidth * model.tableRowCount
+    property int rightWidth: cellLeftWidth * model.tableColumnCount
 
     function computeCellRow(index) {
         return (model.tableColumnCount !== 0) ? Math.floor(index / model.tableColumnCount) : 0
@@ -34,7 +34,7 @@ GridView {
     }
 
     function computeCellX(row, column) {
-        return (leftWidth - row * cellLeftWidth) + (column * cellRightWidth);
+        return (leftWidth - row * cellRightWidth) + (column * cellLeftWidth);
     }
 
     function computeCellY(row, column) {
@@ -45,7 +45,7 @@ GridView {
         return (levelHeight * ((level !== undefined) ? level : maximumWallLevel)) * Math.sin(forwardAngleRadians)
     }
 
-    cellWidth: cellLeftWidth + cellRightWidth
+    cellWidth: cellRightWidth + cellLeftWidth
     cellHeight: cellTopHeight + cellBottomHeight
 
     width: leftWidth + rightWidth
