@@ -100,5 +100,18 @@ Rectangle {
         }
     }
 
+    Keys.onPressed: {
+        if (event.modifiers & Qt.ControlModifier) {
+            if (event.key === Qt.Key_Left)
+                surfaceView.sideAngle = Math.max(surfaceView.sideAngle - 1, 0);
+            else if (event.key === Qt.Key_Right)
+                surfaceView.sideAngle = Math.min(surfaceView.sideAngle + 1, 90);
+            else if (event.key === Qt.Key_Down)
+                surfaceView.forwardAngle = Math.max(surfaceView.forwardAngle - 1, 0);
+            else if (event.key === Qt.Key_Up)
+                surfaceView.forwardAngle = Math.min(surfaceView.forwardAngle + 1, 90);
+        }
+    }
+
     Keys.onEscapePressed: menuPopup.visible = !menuPopup.visible
 }
