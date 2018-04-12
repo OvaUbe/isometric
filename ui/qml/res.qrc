@@ -12,6 +12,7 @@
         <file>styles/debug/Wall.qml</file>
         <file>Backend.qml</file>
         <file>GamePage.qml</file>
+        <file>GameScreen.qml</file>
         <file>MainMenu.qml</file>
         <file>Main.qml</file>
     </qresource>
