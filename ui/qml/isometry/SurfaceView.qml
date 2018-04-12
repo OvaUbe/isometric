@@ -1,5 +1,7 @@
 import QtQuick 2.9
 
+import "qrc:/qml/js/MathUtils.js" as MathUtils
+
 GridView {
     property real forwardAngle
     property real sideAngle
@@ -8,14 +10,10 @@ GridView {
     property int levelHeight
     property int maximumWallLevel
 
-    function toRadians(angle) {
-        return angle * (Math.PI / 180);
-    }
-
     property int maximumWallHeight: levelHeight * maximumWallLevel
 
-    property real forwardAngleRadians: toRadians(forwardAngle)
-    property real sideAngleRadians: toRadians(sideAngle)
+    property real forwardAngleRadians: MathUtils.toRadians(forwardAngle)
+    property real sideAngleRadians: MathUtils.toRadians(sideAngle)
 
     property real cellRightWidth: cellSide * Math.sin(sideAngleRadians)
     property real cellLeftWidth: cellSide * Math.cos(sideAngleRadians)
