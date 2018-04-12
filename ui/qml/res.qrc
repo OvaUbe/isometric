@@ -5,9 +5,11 @@
         <file>components/Triangle.qml</file>
         <file>isometry/SurfaceView.qml</file>
         <file>isometry/Tile.qml</file>
+        <file>isometry/Wall.qml</file>
         <file>js/MathUtils.js</file>
         <file>styles/debug/LocationStyle.qml</file>
         <file>styles/debug/SurfaceTile.qml</file>
+        <file>styles/debug/Wall.qml</file>
         <file>Backend.qml</file>
         <file>GamePage.qml</file>
         <file>MainMenu.qml</file>

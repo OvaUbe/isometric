@@ -79,6 +79,7 @@ TypeRegistrator::TypeRegistrator(const QString& chosenStyle) {
 
     UI_DETAIL_REGISTER_SINGLETON_STYLE("qrc:/qml/styles/debug/LocationStyle.qml", "LocationStyle", "debug", chosenStyle);
     UI_DETAIL_REGISTER_STYLE("qrc:/qml/styles/debug/SurfaceTile.qml", "SurfaceTile", "debug", chosenStyle);
+    UI_DETAIL_REGISTER_STYLE("qrc:/qml/styles/debug/Wall.qml", "Wall", "debug", chosenStyle);
 
     registerType<Launcher>("Launcher", "backend.Launcher");
     registerType<Environment>("Environment", "backend.Environment");
