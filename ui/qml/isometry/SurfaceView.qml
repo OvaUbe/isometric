@@ -29,6 +29,15 @@ GridView {
     property real leftWallSideAngleRadians: Math.PI - ((Math.PI / 2) - (cellLeftWidth ? Math.atan(cellBottomHeight / cellLeftWidth) : 0))
     property real rightWallSideAngleRadians: (Math.PI / 2) - (cellRightWidth ? Math.atan(cellTopHeight / cellRightWidth) : 0)
 
+    QtObject {
+        id: d
+
+        property int leftWallXOffset: - (cellWidth / 2 - cellSide / 2)
+        property int leftWallYOffet: - (cellHeight / 2 - cellSide / 2) + cellTopHeight
+        property int rightWallXOffset: - (cellWidth / 2 - cellSide / 2) + cellLeftWidth
+        property int rightWallYOffset: - (cellHeight / 2 - cellSide / 2) + cellBottomHeight
+    }
+
     function computeCellRow(index) {
         return (model.tableColumnCount !== 0) ? Math.floor(index / model.tableColumnCount) : 0
     }
@@ -50,19 +59,19 @@ GridView {
     }
 
     function computeLeftWallX(wallWidth) {
-        return wallWidth - (cellWidth / 2 - cellSide / 2);
+        return wallWidth + d.leftWallXOffset;
     }
 
     function computeLeftWallY(wallHeight) {
-        return -wallHeight - (cellHeight / 2 - cellSide / 2) + cellTopHeight;
+        return -wallHeight + d.leftWallYOffet;
     }
 
     function computeRightWallX(wallWidth) {
-        return wallWidth - (cellWidth / 2 - cellSide / 2) + cellLeftWidth;
+        return wallWidth + d.rightWallXOffset;
     }
 
     function computeRightWallY(wallHeight) {
-        return -wallHeight - (cellHeight / 2 - cellSide / 2) + cellBottomHeight;
+        return -wallHeight + d.rightWallYOffset;
     }
 
     cellWidth: cellRightWidth + cellLeftWidth
