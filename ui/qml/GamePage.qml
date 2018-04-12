@@ -6,9 +6,12 @@ import QtGraphicalEffects 1.0
 import Backend 1.0
 import styles.LocationStyle 1.0
 import styles.SurfaceTile 1.0
+import styles.Wall 1.0
 
 import "qrc:/qml/components" as Components
 import "qrc:/qml/isometry" as Isometry
+
+import "qrc:/qml/js/MathUtils.js" as MathUtils
 
 Rectangle {
     id: root
@@ -69,6 +72,30 @@ Rectangle {
 
                     forwardAngle: surfaceView.forwardAngle
                     sideAngle: surfaceView.sideAngle
+                }
+
+                Wall {
+                    y: surfaceView.computeLeftWallY(wallHeight)
+                    x: surfaceView.computeLeftWallX(height)
+
+                    visible: wallHeight !== 0
+                    materialName: model.display ? model.materialName : ""
+
+                    wallHeight: model.display ? surfaceView.computeCellHeight(model.level) : 0
+                    panelSide: surfaceView.leftWallTopSide
+                    angleBetweenSides: MathUtils.toDegrees(surfaceView.leftWallSideAngleRadians)
+                }
+
+                Wall {
+                    y: surfaceView.computeRightWallY(wallHeight)
+                    x: surfaceView.computeRightWallX(height)
+
+                    visible: wallHeight !== 0
+                    materialName: model.display ? model.materialName : ""
+
+                    wallHeight: model.display ? surfaceView.computeCellHeight(model.level) : 0
+                    panelSide: surfaceView.rightWallTopSide
+                    angleBetweenSides: MathUtils.toDegrees(surfaceView.rightWallSideAngleRadians)
                 }
             }
         }

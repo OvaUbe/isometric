@@ -23,6 +23,12 @@ GridView {
     property int leftWidth: cellRightWidth * model.tableRowCount
     property int rightWidth: cellLeftWidth * model.tableColumnCount
 
+    property int leftWallTopSide: Math.sqrt(Math.pow(cellLeftWidth, 2) + Math.pow(cellBottomHeight, 2))
+    property int rightWallTopSide: Math.sqrt(Math.pow(cellRightWidth, 2) + Math.pow(cellTopHeight, 2))
+
+    property real leftWallSideAngleRadians: Math.PI - ((Math.PI / 2) - (cellLeftWidth ? Math.atan(cellBottomHeight / cellLeftWidth) : 0))
+    property real rightWallSideAngleRadians: (Math.PI / 2) - (cellRightWidth ? Math.atan(cellTopHeight / cellRightWidth) : 0)
+
     function computeCellRow(index) {
         return (model.tableColumnCount !== 0) ? Math.floor(index / model.tableColumnCount) : 0
     }
@@ -41,6 +47,22 @@ GridView {
 
     function computeCellHeight(level) {
         return (levelHeight * ((level !== undefined) ? level : maximumWallLevel)) * Math.sin(forwardAngleRadians)
+    }
+
+    function computeLeftWallX(wallWidth) {
+        return wallWidth - (cellWidth / 2 - cellSide / 2);
+    }
+
+    function computeLeftWallY(wallHeight) {
+        return -wallHeight - (cellHeight / 2 - cellSide / 2) + cellTopHeight;
+    }
+
+    function computeRightWallX(wallWidth) {
+        return wallWidth - (cellWidth / 2 - cellSide / 2) + cellLeftWidth;
+    }
+
+    function computeRightWallY(wallHeight) {
+        return -wallHeight - (cellHeight / 2 - cellSide / 2) + cellBottomHeight;
     }
 
     cellWidth: cellRightWidth + cellLeftWidth
