@@ -1,7 +1,7 @@
 #include <ui/backend/Environment.hxx>
 #include <ui/backend/Launcher.hxx>
 #include <ui/backend/TypeRegistrator.hxx>
-#include <ui/backend/core/ToString.hxx>
+#include <ui/core/ToString.hxx>
 
 #include <QCommandLineParser>
 #include <QQmlEngine>

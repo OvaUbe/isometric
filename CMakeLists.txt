@@ -87,6 +87,8 @@ set(IGD_UI_SOURCES
     backend/MainLoopQueue.cxx
     backend/TypeRegistrator.cxx
     backend/UiContext.cxx
+    qml/runtime/Parallelogram.cxx
+    qml/runtime/Triangle.cxx
     main.cxx
 )
 string_prepend(IGD_UI_SOURCES ${IGD_UI_ROOT} ${IGD_UI_SOURCES})

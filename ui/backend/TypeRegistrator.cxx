@@ -2,6 +2,8 @@
 
 #include <ui/backend/Environment.hxx>
 #include <ui/backend/Launcher.hxx>
+#include <ui/qml/runtime/Parallelogram.hxx>
+#include <ui/qml/runtime/Triangle.hxx>
 
 #include <QQmlEngine>
 
@@ -77,9 +79,13 @@ TypeRegistrator::TypeRegistrator(const QString& chosenStyle) {
 
     UI_DETAIL_REGISTER_SINGLETON_STYLE("qrc:/qml/styles/debug/LocationStyle.qml", "LocationStyle", "debug", chosenStyle);
     UI_DETAIL_REGISTER_STYLE("qrc:/qml/styles/debug/SurfaceTile.qml", "SurfaceTile", "debug", chosenStyle);
+    UI_DETAIL_REGISTER_STYLE("qrc:/qml/styles/debug/Wall.qml", "Wall", "debug", chosenStyle);
 
-    registerType<ui::Launcher>("Launcher", "backend.Launcher");
-    registerType<ui::Environment>("Environment", "backend.Environment");
+    registerType<Launcher>("Launcher", "backend.Launcher");
+    registerType<Environment>("Environment", "backend.Environment");
+
+    registerType<Parallelogram>("Parallelogram", "runtime.components.Parallelogram");
+    registerType<Triangle>("Triangle", "runtime.components.Triangle");
 }
 
 #undef UI_DETAIL_DO_REGISTER_STYLE

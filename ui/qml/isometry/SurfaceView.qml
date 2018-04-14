@@ -1,34 +1,82 @@
 import QtQuick 2.9
 
+import "qrc:/qml/js/MathUtils.js" as MathUtils
+
 GridView {
     property real forwardAngle
     property real sideAngle
     property int cellSide
 
-    function toRadians(angle) {
-        return angle * (Math.PI / 180);
+    property int levelHeight
+    property int maximumWallLevel
+
+    property int maximumWallHeight: levelHeight * maximumWallLevel
+
+    property real forwardAngleRadians: MathUtils.toRadians(forwardAngle)
+    property real sideAngleRadians: MathUtils.toRadians(sideAngle)
+
+    property real cellRightWidth: cellSide * Math.sin(sideAngleRadians)
+    property real cellLeftWidth: cellSide * Math.cos(sideAngleRadians)
+    property real cellTopHeight: cellLeftWidth * Math.cos(forwardAngleRadians)
+    property real cellBottomHeight: cellRightWidth * Math.cos(forwardAngleRadians)
+
+    property int leftWidth: cellRightWidth * model.tableRowCount
+    property int rightWidth: cellLeftWidth * model.tableColumnCount
+
+    property int leftWallTopSide: Math.sqrt(Math.pow(cellLeftWidth, 2) + Math.pow(cellBottomHeight, 2))
+    property int rightWallTopSide: Math.sqrt(Math.pow(cellRightWidth, 2) + Math.pow(cellTopHeight, 2))
+
+    property real leftWallSideAngleRadians: Math.PI - ((Math.PI / 2) - (cellLeftWidth ? Math.atan(cellBottomHeight / cellLeftWidth) : 0))
+    property real rightWallSideAngleRadians: (Math.PI / 2) - (cellRightWidth ? Math.atan(cellTopHeight / cellRightWidth) : 0)
+
+    QtObject {
+        id: d
+
+        property int leftWallXOffset: - (cellWidth / 2 - cellSide / 2)
+        property int leftWallYOffet: - (cellHeight / 2 - cellSide / 2) + cellTopHeight
+        property int rightWallXOffset: - (cellWidth / 2 - cellSide / 2) + cellLeftWidth
+        property int rightWallYOffset: - (cellHeight / 2 - cellSide / 2) + cellBottomHeight
     }
 
-    property real forwardAngleRadians: toRadians(forwardAngle)
-    property real sideAngleRadians: toRadians(sideAngle)
+    function computeCellRow(index) {
+        return (model.tableColumnCount !== 0) ? Math.floor(index / model.tableColumnCount) : 0
+    }
 
-    property real cellLeftWidth: cellSide * Math.sin(sideAngleRadians)
-    property real cellRightWidth: cellSide * Math.cos(sideAngleRadians)
-    property real cellTopHeight: cellRightWidth * Math.cos(forwardAngleRadians)
-    property real cellBottomHeight: cellLeftWidth * Math.cos(forwardAngleRadians)
+    function computeCellColumn(index) {
+        return (model.tableColumnCount !== 0) ? Math.floor(index % model.tableColumnCount) : 0
+    }
 
-    property int leftWidth: cellLeftWidth * model.tableRowCount
-    property int rightWidth: cellRightWidth * model.tableColumnCount
+    function computeCellX(row, column) {
+        return (leftWidth - row * cellRightWidth) + (column * cellLeftWidth);
+    }
 
-    function computeCellRow(index) { return (model.tableColumnCount !== 0) ? Math.floor(index / model.tableColumnCount) : 0  }
-    function computeCellColumn(index) { return (model.tableColumnCount !== 0) ? Math.floor(index % model.tableColumnCount) : 0  }
+    function computeCellY(row, column) {
+        return maximumWallHeight + row * cellTopHeight + column * cellBottomHeight;
+    }
 
-    function computeCellX(row, column) { return (leftWidth - row * cellLeftWidth) + (column * cellRightWidth); }
-    function computeCellY(row, column) { return row * cellTopHeight + column * cellBottomHeight; }
+    function computeCellHeight(level) {
+        return (levelHeight * ((level !== undefined) ? level : maximumWallLevel)) * Math.sin(forwardAngleRadians)
+    }
 
-    cellWidth: cellLeftWidth + cellRightWidth
+    function computeLeftWallX(wallWidth) {
+        return wallWidth + d.leftWallXOffset;
+    }
+
+    function computeLeftWallY(wallHeight) {
+        return -wallHeight + d.leftWallYOffet;
+    }
+
+    function computeRightWallX(wallWidth) {
+        return wallWidth + d.rightWallXOffset;
+    }
+
+    function computeRightWallY(wallHeight) {
+        return -wallHeight + d.rightWallYOffset;
+    }
+
+    cellWidth: cellRightWidth + cellLeftWidth
     cellHeight: cellTopHeight + cellBottomHeight
 
     width: leftWidth + rightWidth
-    height: cellTopHeight * model.tableRowCount + cellBottomHeight * model.tableColumnCount
+    height: maximumWallHeight + cellTopHeight * model.tableRowCount + cellBottomHeight * model.tableColumnCount
 }

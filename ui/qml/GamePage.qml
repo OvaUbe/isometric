@@ -1,13 +1,12 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.2
-import QtGraphicalEffects 1.0
 
 import Backend 1.0
 import styles.LocationStyle 1.0
 
-import "components" as Components
-import "isometry" as Isometry
+import "qrc:/qml/components" as Components
+import "qrc:/qml" as Local
 
 Rectangle {
     id: root
@@ -16,44 +15,10 @@ Rectangle {
 
     color: LocationStyle.spaceColor
 
-    Flickable {
-        contentHeight: surfaceView.height
-        contentWidth: surfaceView.width
+    Local.GameScreen {
+        id: gameScreen
 
         anchors.fill: parent
-
-        rightMargin: 3 * surfaceView.cellWidth
-        leftMargin: 3 * surfaceView.cellWidth
-        topMargin: 3 * surfaceView.cellHeight
-        bottomMargin: 3 * surfaceView.cellHeight
-
-        Isometry.SurfaceView {
-            id: surfaceView
-
-            forwardAngle: 60
-            sideAngle: 45
-            cellSide: 100
-
-            anchors.centerIn: parent
-
-            model: Backend.environment.surfaceModel
-
-            delegate: Isometry.SurfaceDelegate {
-                property int row: surfaceView.computeCellRow(index)
-                property int column: surfaceView.computeCellColumn(index)
-
-                isHidden: model.display ? false : true
-                materialName: model.materialName ? model.materialName : ""
-
-                forwardAngle: surfaceView.forwardAngle
-                sideAngle: surfaceView.sideAngle
-
-                sideSize: surfaceView.cellSide
-
-                realX: surfaceView.computeCellX(row, column)
-                realY: surfaceView.computeCellY(row, column)
-            }
-        }
     }
 
     Components.BlurredPopup {
@@ -83,4 +48,5 @@ Rectangle {
     }
 
     Keys.onEscapePressed: menuPopup.visible = !menuPopup.visible
+    Keys.forwardTo: gameScreen
 }

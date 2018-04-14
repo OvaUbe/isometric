@@ -3,8 +3,13 @@ import QtQuick 2.9
 Rectangle {
     id: isometricTile
 
+    property int panelSide
+
     property real forwardAngle
     property real sideAngle
+
+    width: panelSide
+    height: panelSide
 
     transform: [
         Rotation {
