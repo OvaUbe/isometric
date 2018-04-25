@@ -4,3 +4,6 @@
 [submodule "cmake/castella"]
 	path = cmake/castella
 	url = https://github.com/OvaUbe/castella
+[submodule "thirdparty/tmxparser"]
+	path = thirdparty/tmxparser
+	url = https://github.com/sainteos/tmxparser.git
