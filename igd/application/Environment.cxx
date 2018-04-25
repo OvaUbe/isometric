@@ -27,9 +27,9 @@ Environment::Environment(const IApplication& application)
     , _lifeTokenReleaser(gum::make_token<gum::FunctionToken>([this] { _lifeToken.release(); })) {}
 
 gum::Token Environment::create() {
-    _worker->push(gum::make_cancellable([this] { doCreate(); }, _lifeToken.get_handle()));
+    _worker->push(gum::make_cancellable([this] { doCreate(); }, _lifeToken));
 
-    return gum::make_token<gum::FunctionToken>(gum::make_cancellable([this] { destroy(); }, _lifeToken.get_handle()));
+    return gum::make_token<gum::FunctionToken>(gum::make_cancellable([this] { destroy(); }, _lifeToken));
 }
 
 void Environment::doCreate() {
@@ -41,7 +41,7 @@ void Environment::doCreate() {
 }
 
 void Environment::destroy() {
-    _worker->push(gum::make_cancellable([this] { doDestroy(); }, _lifeToken.get_handle()));
+    _worker->push(gum::make_cancellable([this] { doDestroy(); }, _lifeToken));
 }
 
 void Environment::doDestroy() {

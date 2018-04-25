@@ -12,9 +12,9 @@ Launcher::Launcher(const IApplication& application)
     , _worker(application.getWorker()) {}
 
 gum::Token Launcher::startGame() {
-    _worker->push(gum::make_cancellable([this] { doStartGame(); }, _lifeToken.get_handle()));
+    _worker->push(gum::make_cancellable([this] { doStartGame(); }, _lifeToken));
 
-    return gum::make_token<gum::FunctionToken>(gum::make_cancellable([this] { endGame(); }, _lifeToken.get_handle()));
+    return gum::make_token<gum::FunctionToken>(gum::make_cancellable([this] { endGame(); }, _lifeToken));
 }
 
 void Launcher::doStartGame() {
@@ -26,7 +26,7 @@ void Launcher::doStartGame() {
 }
 
 void Launcher::endGame() {
-    _worker->push(gum::make_cancellable([this] { doEndGame(); }, _lifeToken.get_handle()));
+    _worker->push(gum::make_cancellable([this] { doEndGame(); }, _lifeToken));
 }
 
 void Launcher::doEndGame() {
