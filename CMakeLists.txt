@@ -73,6 +73,12 @@ add_subdirectory(${GUM_ROOT})
 include_directories(${GUM_ROOT})
 list(APPEND IGD_EXTERNAL_LIBS ${GUM_LIBS})
 
+set(TMXPARSER_ROOT ${CMAKE_SOURCE_DIR}/thirdparty/tmxparser)
+set(TMXPARSER_LIBS tmxparser)
+add_subdirectory(${TMXPARSER_ROOT})
+include_directories(${TMXPARSER_ROOT}/src)
+list(APPEND IGD_EXTERNAL_LIBS ${TMXPARSER_LIBS})
+
 string_join(IGD_EXTERNAL_LIBS_STRING " " ${IGD_EXTERNAL_LIBS})
 log(info "Linking with:" ${IGD_EXTERNAL_LIBS_STRING})
 
