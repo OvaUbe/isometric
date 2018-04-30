@@ -32,10 +32,10 @@ void Environment::OnCurrentLocation(const igd::IReadonlyLocationPtr& currentLoca
     if (!currentLocation)
         return;
 
-    currentLocation->getReadonlySurfaceSize()->changed().connect(std::bind(&Self::OnCurrentSurfaceSizeChanged, this, _1), _uiContext->getWorker(),
-                                                                 _currentLocationConnections);
-    currentLocation->getReadonlySurfaceMap()->changed().connect(std::bind(&Self::OnCurrentSurfaceMapChanged, this, _1, _2, _3), _uiContext->getWorker(),
-                                                                _currentLocationConnections);
+    currentLocation->getReadonlySurfaceSize()->changed().connect(
+        std::bind(&Self::OnCurrentSurfaceSizeChanged, this, _1), _uiContext->getWorker(), _currentLocationConnections);
+    currentLocation->getReadonlySurfaceMap()->changed().connect(
+        std::bind(&Self::OnCurrentSurfaceMapChanged, this, _1, _2, _3), _uiContext->getWorker(), _currentLocationConnections);
 }
 
 void Environment::OnCurrentSurfaceSizeChanged(const igd::SurfaceSize& surfaceSize) {
