@@ -7,3 +7,6 @@
 [submodule "thirdparty/tmxparser"]
 	path = thirdparty/tmxparser
 	url = https://github.com/sainteos/tmxparser.git
+[submodule "clang-format"]
+	path = clang-format
+	url = https://github.com/OvaUbe/clang-format-utils.git
