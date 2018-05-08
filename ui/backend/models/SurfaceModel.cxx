@@ -25,7 +25,7 @@ SurfaceModel::SurfaceModel(QObject* parent)
 }
 
 int SurfaceModel::rowCount(const QModelIndex& parent) const {
-    return parent.isValid() ? 0 : _table.size();
+    return parent.isValid() ? 0 : int(_table.size());
 }
 
 int SurfaceModel::columnCount(const QModelIndex& parent) const {
@@ -47,7 +47,7 @@ QVariant SurfaceModel::data(const QModelIndex& index, int role) const {
         return boost::apply_visitor(MaterialVisitor(), surfaceUnit->getMaterial());
     case CustomRoles::Level:
         if (const auto level = surfaceUnit->getLevel())
-            return (int)*level;
+            return int(*level);
         return QVariant();
     default:
         return QVariant();
@@ -86,11 +86,11 @@ void SurfaceModel::erase(const igd::SurfaceDescriptor& surfaceDescriptor) {
 }
 
 size_t SurfaceModel::tableIndexFromIndex(const QModelIndex& index) const {
-    GUM_CHECK_INDEX((size_t)index.row(), _table.size());
-    return index.row();
+    GUM_CHECK_INDEX(size_t(index.row()), _table.size());
+    return size_t(index.row());
 }
 
 QModelIndex SurfaceModel::indexFromSurfaceDescriptor(const igd::SurfaceDescriptor& surfaceDescriptor) const {
-    return createIndex(_columnCount * surfaceDescriptor.y() + surfaceDescriptor.x(), 0);
+    return createIndex(int(_columnCount * surfaceDescriptor.y() + surfaceDescriptor.x()), 0);
 }
 }

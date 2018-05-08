@@ -42,11 +42,11 @@ class SurfaceModel : public QAbstractTableModel {
     }
 
     Q_INVOKABLE int tableRowCount() const {
-        return _rowCount;
+        return int(_rowCount);
     }
 
     Q_INVOKABLE int tableColumnCount() const {
-        return _columnCount;
+        return int(_columnCount);
     }
 
     void resize(const igd::SurfaceSize& surfaceSize);
