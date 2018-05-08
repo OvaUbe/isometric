@@ -45,6 +45,8 @@ void Environment::OnCurrentSurfaceSizeChanged(const igd::SurfaceSize& surfaceSiz
 }
 
 void Environment::OnCurrentSurfaceMapChanged(gum::MapOp op, const igd::SurfaceDescriptor& surfaceDescriptor, const igd::ISurfaceUnitRef& surfaceUnit) {
+    _logger.debug() << "OnCurrentSurfaceMapChanged(" << op << ", " << surfaceDescriptor << ")";
+
     switch (op) {
     case gum::MapOp::Added:
     case gum::MapOp::Updated:
