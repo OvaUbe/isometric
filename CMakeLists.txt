@@ -38,7 +38,7 @@ else()
     set(IGD_OPTIMIZE_FOR_SIZE False)
 endif()
 
-set(IGD_CXX_COMPILER_DIAGNOSTICS_SWITCH "-Wall -Wextra -Wpedantic -Werror -Wno-unused-function")
+set(IGD_CXX_COMPILER_DIAGNOSTICS_SWITCH "-Wall -Wextra -Wpedantic -Werror -Wno-unused-function -Wno-gnu-statement-expression")
 
 if(${IGD_OPTIMIZE_FOR_SIZE})
     set(IGD_CXX_OPTIMIZATION_SWITCH "-Os")
