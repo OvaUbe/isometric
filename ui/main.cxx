@@ -35,7 +35,7 @@ int do_main(int argc, char** argv) {
                       << "style",
         "Custom ui style directory.",
         "style",
-        "debug");
+        "igd");
     parser.addOption(styleOption);
 
     parser.process(app);
