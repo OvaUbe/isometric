@@ -62,24 +62,30 @@ int registerSingleton(const gum::StringLiteral& typeName) {
     return registerSingleton<Type_>(typeName, typeName);
 }
 
-#define UI_DETAIL_DO_REGISTER_STYLE(Registrator_, Source_, Type_, Ns_, ChosenNs_)                                                                              \
+#define UI_DETAIL_DO_REGISTER_STYLE(Registrator_, Type_, Ns_, ChosenNs_)                                                                                       \
     do {                                                                                                                                                       \
-        Registrator_(Source_, Type_, "styles." Ns_ "." Type_);                                                                                                 \
+        Registrator_("qrc:/qml/styles/" Ns_ "/" Type_ ".qml", Type_, "styles." Ns_ "." Type_);                                                                 \
         if (Ns_ == ChosenNs_)                                                                                                                                  \
-            Registrator_(Source_, Type_, "styles." Type_);                                                                                                     \
+            Registrator_("qrc:/qml/styles/" Ns_ "/" Type_ ".qml", Type_, "styles." Type_);                                                                     \
     } while (0)
 
-#define UI_DETAIL_REGISTER_STYLE(Source_, Type_, Ns_, ChosenNs_) UI_DETAIL_DO_REGISTER_STYLE(registerType, Source_, Type_, Ns_, ChosenNs_)
+#define UI_DETAIL_REGISTER_STYLE(Type_, Ns_, ChosenNs_) UI_DETAIL_DO_REGISTER_STYLE(registerType, Type_, Ns_, ChosenNs_)
 
-#define UI_DETAIL_REGISTER_SINGLETON_STYLE(Source_, Type_, Ns_, ChosenNs_) UI_DETAIL_DO_REGISTER_STYLE(registerSingleton, Source_, Type_, Ns_, ChosenNs_)
+#define UI_DETAIL_REGISTER_SINGLETON_STYLE(Type_, Ns_, ChosenNs_) UI_DETAIL_DO_REGISTER_STYLE(registerSingleton, Type_, Ns_, ChosenNs_)
 }
 
 TypeRegistrator::TypeRegistrator(const QString& chosenStyle) {
-    registerSingleton("qrc:/qml/Backend.qml", "Backend");
+#define UI_DETAIL_REGISTER_STYLE_SOURCES(Ns_)                                                                                                                  \
+    UI_DETAIL_REGISTER_SINGLETON_STYLE("LocationStyle", Ns_, chosenStyle);                                                                                     \
+    UI_DETAIL_REGISTER_STYLE("SurfaceTile", Ns_, chosenStyle);                                                                                                 \
+    UI_DETAIL_REGISTER_STYLE("Wall", Ns_, chosenStyle)
 
-    UI_DETAIL_REGISTER_SINGLETON_STYLE("qrc:/qml/styles/debug/LocationStyle.qml", "LocationStyle", "debug", chosenStyle);
-    UI_DETAIL_REGISTER_STYLE("qrc:/qml/styles/debug/SurfaceTile.qml", "SurfaceTile", "debug", chosenStyle);
-    UI_DETAIL_REGISTER_STYLE("qrc:/qml/styles/debug/Wall.qml", "Wall", "debug", chosenStyle);
+    UI_DETAIL_REGISTER_STYLE_SOURCES("debug");
+    UI_DETAIL_REGISTER_STYLE_SOURCES("igd");
+
+#undef UI_DETAIL_REGISTER_STYLE_SOURCES
+
+    registerSingleton("qrc:/qml/Backend.qml", "Backend");
 
     registerType<Launcher>("Launcher", "backend.Launcher");
     registerType<Environment>("Environment", "backend.Environment");
