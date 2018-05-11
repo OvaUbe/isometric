@@ -2,6 +2,7 @@
 
 #include <ui/backend/Environment.hxx>
 #include <ui/backend/Launcher.hxx>
+#include <ui/core/ToString.hxx>
 #include <ui/qml/runtime/Parallelogram.hxx>
 #include <ui/qml/runtime/Triangle.hxx>
 
@@ -74,7 +75,11 @@ int registerSingleton(const gum::StringLiteral& typeName) {
 #define UI_DETAIL_REGISTER_SINGLETON_STYLE(Type_, Ns_, ChosenNs_) UI_DETAIL_DO_REGISTER_STYLE(registerSingleton, Type_, Ns_, ChosenNs_)
 }
 
+GUM_DEFINE_LOGGER(TypeRegistrator);
+
 TypeRegistrator::TypeRegistrator(const QString& chosenStyle) {
+    _logger.info() << "Chosen style: " << chosenStyle;
+
 #define UI_DETAIL_REGISTER_STYLE_SOURCES(Ns_)                                                                                                                  \
     UI_DETAIL_REGISTER_SINGLETON_STYLE("LocationStyle", Ns_, chosenStyle);                                                                                     \
     UI_DETAIL_REGISTER_STYLE("SurfaceTile", Ns_, chosenStyle);                                                                                                 \
