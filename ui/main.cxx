@@ -16,9 +16,9 @@ using namespace ui;
 
 namespace {
 
-QString getCommandLineOption(const QCommandLineParser& parser, const QString& option) {
+QString getCommandLineOption(const QCommandLineParser& parser, const QCommandLineOption& option) {
     const QString value = parser.value(option);
-    GUM_CHECK(!value.isEmpty(), gum::String() << option << " option was not specified");
+    GUM_CHECK(!value.isEmpty(), gum::String() << option.names() << " option was not specified");
     return value;
 }
 }
@@ -29,14 +29,22 @@ int do_main(int argc, char** argv) {
     QCommandLineParser parser;
     parser.setApplicationDescription("Isometric");
     parser.addHelpOption();
-    parser.addOption({"style", "Custom ui style directory.", "style", "debug"});
+
+    QCommandLineOption styleOption(
+        QStringList() << "s"
+                      << "style",
+        "Custom ui style directory.",
+        "style",
+        "debug");
+    parser.addOption(styleOption);
+
     parser.process(app);
 
     QQuickView mainView;
     QQmlEngine& qmlEngine = *mainView.engine();
     QObject::connect(&qmlEngine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
 
-    TypeRegistrator typeRegistrator(getCommandLineOption(parser, "style"));
+    TypeRegistrator typeRegistrator(getCommandLineOption(parser, styleOption));
 
     const UiContextRef uiContext = gum::make_shared_ref<UiContext>(&app);
     Launcher launcher(qmlEngine, uiContext);
