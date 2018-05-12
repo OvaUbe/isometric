@@ -35,7 +35,7 @@ gum::Token Environment::create() {
 void Environment::doCreate() {
     _logger.info() << "create()";
 
-    _currentLocationId = "startLocation";
+    _currentLocationId = "entrance";
     _locationTokens += _locationManager->load(*_currentLocationId);
     _locationBundleConnection = _locationManager->getLocationBundle()->changed().connect(std::bind(&Self::onLocationBundleChanged, this, _1, _2, _3), _worker);
 }
