@@ -53,7 +53,7 @@ Flickable {
             }
 
             Components.Optional {
-                initialized: model.display !== undefined
+                initialized: model.display
 
                 source: "qrc:/qml/styles/" + Backend.settings.chosenApplicationStyle + "/SurfaceTile.qml"
                 properties: {
@@ -72,7 +72,7 @@ Flickable {
             }
 
             Components.Optional {
-                initialized: (model.display !== undefined) && (wallHeight !== 0)
+                initialized: model.display && (wallHeight !== 0)
 
                 source: "qrc:/qml/styles/" + Backend.settings.chosenApplicationStyle + "/Wall.qml"
                 properties: {
@@ -88,7 +88,7 @@ Flickable {
             }
 
             Components.Optional {
-                initialized: (model.display !== undefined) && (wallHeight !== 0)
+                initialized: model.display && (wallHeight !== 0)
 
                 source: "qrc:/qml/styles/" + Backend.settings.chosenApplicationStyle + "/Wall.qml"
                 properties: {

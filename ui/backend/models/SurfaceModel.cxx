@@ -29,16 +29,14 @@ int SurfaceModel::columnCount(const QModelIndex& parent) const {
 }
 
 QVariant SurfaceModel::data(const QModelIndex& index, int role) const {
-    if (!index.isValid())
-        return QVariant();
+    const auto surfaceUnit = index.isValid() ? _table[tableIndexFromIndex(index)] : nullptr;
+    if (role == Qt::DisplayRole)
+        return QVariant(bool(surfaceUnit));
 
-    const auto surfaceUnit = _table[tableIndexFromIndex(index)];
     if (!surfaceUnit)
         return QVariant();
 
     switch (role) {
-    case Qt::DisplayRole:
-        return QVariant(true);
     case CustomRoles::MaterialName:
         return gum::match(surfaceUnit->getMaterial(), [](const auto& material) { return material.getName().c_str(); });
     case CustomRoles::Level:
