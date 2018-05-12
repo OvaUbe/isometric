@@ -12,6 +12,11 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_INCLUDE_CURRENT_DIR True)
 set(CMAKE_AUTOMOC True)
+set(CMAKE_AUTORCC True)
+
+if(POLICY CMP0058)
+    cmake_policy(SET CMP0058 NEW)
+endif()
 
 log(info "Cmake build type:" ${CMAKE_BUILD_TYPE})
 log(info "C++ standard:" ${CMAKE_CXX_STANDARD})
@@ -99,11 +104,9 @@ set(IGD_UI_SOURCES
 )
 string_prepend(IGD_UI_SOURCES ${IGD_UI_ROOT} ${IGD_UI_SOURCES})
 
-set(IGD_RCC_RESOURCES
+set(IGD_QRC_RESOURCES
     ${IGD_QML_ROOT}/res.qrc
 )
-qt5_add_resources(IGD_RCC_SOURCES ${IGD_RCC_RESOURCES})
-set_property(SOURCE qrc_res.cpp PROPERTY SKIP_AUTOMOC ON)
 
 set(IGD_SOURCES
     application/Application.cxx
@@ -116,7 +119,7 @@ string_prepend(IGD_SOURCES ${IGD_ROOT} ${IGD_SOURCES})
 
 dump_definitions()
 
-add_executable(isometric ${IGD_UI_SOURCES} ${IGD_RCC_SOURCES} ${IGD_SOURCES})
+add_executable(isometric ${IGD_UI_SOURCES} ${IGD_QRC_RESOURCES} ${IGD_SOURCES})
 set_target_properties(isometric PROPERTIES COMPILE_FLAGS ${IGD_CXX_COMPILEFLAGS})
 target_link_libraries(isometric ${IGD_EXTERNAL_LIBS})
 
