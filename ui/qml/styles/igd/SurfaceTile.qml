@@ -28,5 +28,14 @@ Isometry.Tile {
 
             source: "/assets/maps/" + tilesetPath
         }
+
+        Rectangle {
+            anchors.fill: parent
+
+            border.width: 1
+            border.color: "black"
+
+            color: "transparent"
+        }
     }
 }
