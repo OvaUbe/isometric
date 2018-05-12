@@ -2,6 +2,7 @@
 
 #include <ui/backend/Environment.hxx>
 #include <ui/backend/Launcher.hxx>
+#include <ui/backend/Settings.hxx>
 #include <ui/core/ToString.hxx>
 #include <ui/qml/runtime/Parallelogram.hxx>
 #include <ui/qml/runtime/Triangle.hxx>
@@ -92,6 +93,7 @@ TypeRegistrator::TypeRegistrator(const QString& chosenStyle) {
 
     registerSingleton("qrc:/qml/Backend.qml", "Backend");
 
+    registerType<Settings>("Launcher", "backend.Settings");
     registerType<Launcher>("Launcher", "backend.Launcher");
     registerType<Environment>("Environment", "backend.Environment");
 

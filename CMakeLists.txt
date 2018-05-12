@@ -96,6 +96,7 @@ set(IGD_UI_SOURCES
     backend/Environment.cxx
     backend/Launcher.cxx
     backend/MainLoopQueue.cxx
+    backend/Settings.cxx
     backend/TypeRegistrator.cxx
     backend/UiContext.cxx
     qml/runtime/Parallelogram.cxx
