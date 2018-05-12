@@ -58,7 +58,13 @@ Flickable {
                 source: "qrc:/qml/styles/" + Backend.settings.chosenApplicationStyle + "/SurfaceTile.qml"
                 properties: {
                     "y": Qt.binding(function() { return -surfaceView.computeCellHeight(model.level); }),
+
                     "materialName": Qt.binding(function() { return model.materialName; }),
+
+                    "tilesetPath": Qt.binding(function() { return model.tilesetPath; }),
+                    "tileId": Qt.binding(function() { return model.tileId; }),
+                    "tileSide": Qt.binding(function() { return model.tileSide; }),
+
                     "panelSide": Qt.binding(function() { return surfaceView.cellSide; }),
                     "forwardAngle": Qt.binding(function() { return surfaceView.forwardAngle; }),
                     "sideAngle": Qt.binding(function() { return surfaceView.sideAngle; })

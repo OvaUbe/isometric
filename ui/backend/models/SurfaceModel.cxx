@@ -1,6 +1,10 @@
 #include <ui/backend/models/SurfaceModel.hxx>
 
+#include <igd/core/Geometry.hxx>
+
 #include <gum/maybe/Maybe.h>
+
+#include <QPoint>
 
 namespace ui {
 
@@ -19,9 +23,11 @@ SurfaceModel::SurfaceModel(QObject* parent)
     , _rowCount()
     , _columnCount() {
     _roleNames.insert(Qt::DisplayRole, "display");
-
     _roleNames.insert(CustomRoles::MaterialName, "materialName");
     _roleNames.insert(CustomRoles::Level, "level");
+    _roleNames.insert(CustomRoles::TilesetPath, "tilesetPath");
+    _roleNames.insert(CustomRoles::TileId, "tileId");
+    _roleNames.insert(CustomRoles::TileSide, "tileSide");
 }
 
 int SurfaceModel::rowCount(const QModelIndex& parent) const {
@@ -49,6 +55,14 @@ QVariant SurfaceModel::data(const QModelIndex& index, int role) const {
         if (const auto level = surfaceUnit->getLevel())
             return int(*level);
         return QVariant();
+    case CustomRoles::TilesetPath:
+        return surfaceUnit->getTileInfo().TilesetPath.c_str();
+    case CustomRoles::TileId: {
+        const igd::Position<2> tileId = surfaceUnit->getTileInfo().TileId;
+        return QPoint(int(tileId.x()), int(tileId.y()));
+    }
+    case CustomRoles::TileSide:
+        return surfaceUnit->getTileInfo().TileSide;
     default:
         return QVariant();
     }
