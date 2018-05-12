@@ -41,6 +41,10 @@ int do_main(int argc, char** argv) {
 
     parser.process(app);
 
+    gum::UniquePtr<Launcher> launcher;
+    gum::UniquePtr<Environment> environment;
+    gum::UniquePtr<Settings> settings;
+
     QQuickView mainView;
     QQmlEngine& qmlEngine = *mainView.engine();
     QObject::connect(&qmlEngine, &QQmlEngine::quit, &app, &QGuiApplication::quit);
@@ -48,11 +52,11 @@ int do_main(int argc, char** argv) {
     TypeRegistrator typeRegistrator(getCommandLineOption(parser, styleOption));
 
     const UiContextRef uiContext = gum::make_shared_ref<UiContext>(&app);
-    Launcher launcher(qmlEngine, uiContext);
-    Environment environment(qmlEngine, uiContext);
+    launcher = gum::make_unique<Launcher>(qmlEngine, uiContext);
+    environment = gum::make_unique<Environment>(qmlEngine, uiContext);
 
-    Settings settings(qmlEngine, uiContext);
-    settings.setChosenApplicationStyle(getCommandLineOption(parser, styleOption));
+    settings = gum::make_unique<Settings>(qmlEngine, uiContext);
+    settings->setChosenApplicationStyle(getCommandLineOption(parser, styleOption));
 
     mainView.setSource(QUrl::fromLocalFile(":/qml/Main.qml"));
     mainView.show();
