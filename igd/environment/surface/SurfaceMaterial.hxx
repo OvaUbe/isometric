@@ -15,12 +15,10 @@ namespace surface_materials {
         }                                                                                                                                                      \
     }
 
-IGD_DETAIL_DECLARE_SIMPLE_MATERIAL(Steel, "steel");
-IGD_DETAIL_DECLARE_SIMPLE_MATERIAL(CeramicTile, "ceramicTile");
-IGD_DETAIL_DECLARE_SIMPLE_MATERIAL(Concrete, "concrete");
+IGD_DETAIL_DECLARE_SIMPLE_MATERIAL(Stub, "stub");
 
 #undef IGD_DETAIL_DECLARE_SIMPLE_MATERIAL
 }
 
-using SurfaceMaterial = boost::variant<surface_materials::Steel, surface_materials::CeramicTile, surface_materials::Concrete>;
+using SurfaceMaterial = boost::variant<surface_materials::Stub>;
 }
