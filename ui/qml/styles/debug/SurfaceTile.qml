@@ -5,6 +5,9 @@ import "qrc:/qml/isometry" as Isometry
 
 Isometry.Tile {
     property string materialName
+    property string tilesetPath
+    property point tileId
+    property int tileSide
 
     color: "white"
 

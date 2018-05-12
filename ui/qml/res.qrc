@@ -11,6 +11,9 @@
         <file>styles/debug/LocationStyle.qml</file>
         <file>styles/debug/SurfaceTile.qml</file>
         <file>styles/debug/Wall.qml</file>
+        <file>styles/igd/LocationStyle.qml</file>
+        <file>styles/igd/SurfaceTile.qml</file>
+        <file>styles/igd/Wall.qml</file>
         <file>Backend.qml</file>
         <file>GamePage.qml</file>
         <file>GameScreen.qml</file>
