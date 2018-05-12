@@ -117,6 +117,7 @@ set(IGD_SOURCES
     application/Launcher.cxx
     application/LocationManager.cxx
     environment/surface/SurfaceTable.cxx
+    environment/tiled/TiledMapParser.cxx
 )
 string_prepend(IGD_SOURCES ${IGD_ROOT} ${IGD_SOURCES})
 
