@@ -10,6 +10,6 @@ Loader {
         if (initialized)
             setSource(source, properties)
         else
-            source = ""
+            sourceComponent = undefined;
     }
 }
