@@ -22,8 +22,8 @@ Flickable {
     Isometry.SurfaceView {
         id: surfaceView
 
-        forwardAngle: 60
-        sideAngle: 45
+        forwardAngle: 0
+        sideAngle: 0
         cellSide: 100
 
         levelHeight: 30
