@@ -2,21 +2,11 @@
 
 #include <igd/core/Geometry.hxx>
 
-#include <gum/maybe/Maybe.h>
+#include <gum/Match.h>
 
 #include <QPoint>
 
 namespace ui {
-
-namespace {
-
-struct MaterialVisitor : public boost::static_visitor<QVariant> {
-    template <typename Material_>
-    QVariant operator()(const Material_& material) const {
-        return material.getName().c_str();
-    }
-};
-}
 
 SurfaceModel::SurfaceModel(QObject* parent)
     : QAbstractTableModel(parent)
@@ -50,7 +40,7 @@ QVariant SurfaceModel::data(const QModelIndex& index, int role) const {
     case Qt::DisplayRole:
         return QVariant(true);
     case CustomRoles::MaterialName:
-        return boost::apply_visitor(MaterialVisitor(), surfaceUnit->getMaterial());
+        return gum::match(surfaceUnit->getMaterial(), [](const auto& material) { return material.getName().c_str(); });
     case CustomRoles::Level:
         if (const auto level = surfaceUnit->getLevel())
             return int(*level);
