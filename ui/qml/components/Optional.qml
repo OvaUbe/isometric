@@ -8,8 +8,15 @@ Loader {
 
     onInitializedChanged: {
         if (initialized)
-            setSource(source, properties)
+            setSource(source, bindProperties());
         else
             sourceComponent = undefined;
+    }
+
+    function bindProperties() {
+        return Object.keys(properties).reduce(function(accumulator, key) {
+            accumulator[key] = Qt.binding(function() { return properties[key]; });
+            return accumulator;
+        }, {});
     }
 }

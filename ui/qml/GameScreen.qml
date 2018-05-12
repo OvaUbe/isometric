@@ -57,17 +57,17 @@ Flickable {
 
                 source: "qrc:/qml/styles/" + Backend.settings.chosenApplicationStyle + "/SurfaceTile.qml"
                 properties: {
-                    "y": Qt.binding(function() { return -surfaceView.computeCellHeight(model.level); }),
+                    "y": -surfaceView.computeCellHeight(model.level),
 
-                    "materialName": Qt.binding(function() { return model.materialName; }),
+                    "materialName": model.materialName,
 
-                    "tilesetPath": Qt.binding(function() { return model.tilesetPath; }),
-                    "tileId": Qt.binding(function() { return model.tileId; }),
-                    "tileSide": Qt.binding(function() { return model.tileSide; }),
+                    "tilesetPath": model.tilesetPath,
+                    "tileId": model.tileId,
+                    "tileSide": model.tileSide,
 
-                    "panelSide": Qt.binding(function() { return surfaceView.cellSide; }),
-                    "forwardAngle": Qt.binding(function() { return surfaceView.forwardAngle; }),
-                    "sideAngle": Qt.binding(function() { return surfaceView.sideAngle; })
+                    "panelSide": surfaceView.cellSide,
+                    "forwardAngle": surfaceView.forwardAngle,
+                    "sideAngle": surfaceView.sideAngle
                 }
             }
 
@@ -76,14 +76,14 @@ Flickable {
 
                 source: "qrc:/qml/styles/" + Backend.settings.chosenApplicationStyle + "/Wall.qml"
                 properties: {
-                    "y": Qt.binding(function() { return surfaceView.computeLeftWallY(wallHeight); }),
-                    "x": Qt.binding(function() { return surfaceView.computeLeftWallX(height); }),
+                    "y": surfaceView.computeLeftWallY(wallHeight),
+                    "x": surfaceView.computeLeftWallX(height),
 
-                    "materialName": Qt.binding(function() { return model.materialName; }),
+                    "materialName": model.materialName,
 
-                    "wallHeight": Qt.binding(function() { return wallHeight; }),
-                    "panelSide": Qt.binding(function() { return surfaceView.leftWallTopSide; }),
-                    "angleBetweenSides": Qt.binding(function() { return MathUtils.toDegrees(surfaceView.leftWallSideAngleRadians); })
+                    "wallHeight": wallHeight,
+                    "panelSide": surfaceView.leftWallTopSide,
+                    "angleBetweenSides": MathUtils.toDegrees(surfaceView.leftWallSideAngleRadians)
                 }
             }
 
@@ -92,14 +92,14 @@ Flickable {
 
                 source: "qrc:/qml/styles/" + Backend.settings.chosenApplicationStyle + "/Wall.qml"
                 properties: {
-                    "y": Qt.binding(function() { return surfaceView.computeRightWallY(wallHeight); }),
-                    "x": Qt.binding(function() { return surfaceView.computeRightWallX(height); }),
+                    "y": surfaceView.computeRightWallY(wallHeight),
+                    "x": surfaceView.computeRightWallX(height),
 
-                    "materialName": Qt.binding(function() { return model.materialName; }),
+                    "materialName": model.materialName,
 
-                    "wallHeight": Qt.binding(function() { return wallHeight; }),
-                    "panelSide": Qt.binding(function() { return surfaceView.rightWallTopSide; }),
-                    "angleBetweenSides": Qt.binding(function() { return MathUtils.toDegrees(surfaceView.rightWallSideAngleRadians); })
+                    "wallHeight": wallHeight,
+                    "panelSide": surfaceView.rightWallTopSide,
+                    "angleBetweenSides": MathUtils.toDegrees(surfaceView.rightWallSideAngleRadians)
                 }
             }
         }
