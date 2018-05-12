@@ -6,6 +6,7 @@ import styles.SurfaceTile 1.0
 import styles.Wall 1.0
 
 import "qrc:/qml/isometry" as Isometry
+import "qrc:/qml/components" as Components
 
 import "qrc:/qml/js/MathUtils.js" as MathUtils
 
@@ -36,6 +37,8 @@ Flickable {
             property int row: surfaceView.computeCellRow(index)
             property int column: surfaceView.computeCellColumn(index)
 
+            property int wallHeight: surfaceView.computeCellHeight(model.level)
+
             x: calculateX()
             y: calculateY()
             onXChanged: x = Qt.binding(calculateX)
@@ -49,40 +52,49 @@ Flickable {
                 return surfaceView.computeCellY(row, column)
             }
 
-            SurfaceTile {
-                y: model.display ? -surfaceView.computeCellHeight(model.level) : 0
+            Components.Optional {
+                initialized: model.display !== undefined
 
-                visible: model.display ? true : false
-                materialName: model.display ? model.materialName : ""
-
-                panelSide: surfaceView.cellSide
-
-                forwardAngle: surfaceView.forwardAngle
-                sideAngle: surfaceView.sideAngle
+                source: "qrc:/qml/styles/" + Backend.settings.chosenApplicationStyle + "/SurfaceTile.qml"
+                properties: {
+                    "y": Qt.binding(function() { return -surfaceView.computeCellHeight(model.level); }),
+                    "materialName": Qt.binding(function() { return model.materialName; }),
+                    "panelSide": Qt.binding(function() { return surfaceView.cellSide; }),
+                    "forwardAngle": Qt.binding(function() { return surfaceView.forwardAngle; }),
+                    "sideAngle": Qt.binding(function() { return surfaceView.sideAngle; })
+                }
             }
 
-            Wall {
-                y: surfaceView.computeLeftWallY(wallHeight)
-                x: surfaceView.computeLeftWallX(height)
+            Components.Optional {
+                initialized: (model.display !== undefined) && (wallHeight !== 0)
 
-                visible: wallHeight !== 0
-                materialName: model.display ? model.materialName : ""
+                source: "qrc:/qml/styles/" + Backend.settings.chosenApplicationStyle + "/Wall.qml"
+                properties: {
+                    "y": Qt.binding(function() { return surfaceView.computeLeftWallY(wallHeight); }),
+                    "x": Qt.binding(function() { return surfaceView.computeLeftWallX(height); }),
 
-                wallHeight: model.display ? surfaceView.computeCellHeight(model.level) : 0
-                panelSide: surfaceView.leftWallTopSide
-                angleBetweenSides: MathUtils.toDegrees(surfaceView.leftWallSideAngleRadians)
+                    "materialName": Qt.binding(function() { return model.materialName; }),
+
+                    "wallHeight": Qt.binding(function() { return wallHeight; }),
+                    "panelSide": Qt.binding(function() { return surfaceView.leftWallTopSide; }),
+                    "angleBetweenSides": Qt.binding(function() { return MathUtils.toDegrees(surfaceView.leftWallSideAngleRadians); })
+                }
             }
 
-            Wall {
-                y: surfaceView.computeRightWallY(wallHeight)
-                x: surfaceView.computeRightWallX(height)
+            Components.Optional {
+                initialized: (model.display !== undefined) && (wallHeight !== 0)
 
-                visible: wallHeight !== 0
-                materialName: model.display ? model.materialName : ""
+                source: "qrc:/qml/styles/" + Backend.settings.chosenApplicationStyle + "/Wall.qml"
+                properties: {
+                    "y": Qt.binding(function() { return surfaceView.computeRightWallY(wallHeight); }),
+                    "x": Qt.binding(function() { return surfaceView.computeRightWallX(height); }),
 
-                wallHeight: model.display ? surfaceView.computeCellHeight(model.level) : 0
-                panelSide: surfaceView.rightWallTopSide
-                angleBetweenSides: MathUtils.toDegrees(surfaceView.rightWallSideAngleRadians)
+                    "materialName": Qt.binding(function() { return model.materialName; }),
+
+                    "wallHeight": Qt.binding(function() { return wallHeight; }),
+                    "panelSide": Qt.binding(function() { return surfaceView.rightWallTopSide; }),
+                    "angleBetweenSides": Qt.binding(function() { return MathUtils.toDegrees(surfaceView.rightWallSideAngleRadians); })
+                }
             }
         }
     }
