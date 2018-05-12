@@ -90,6 +90,7 @@ log(info "Linking with:" ${IGD_EXTERNAL_LIBS_STRING})
 set(IGD_ROOT ${CMAKE_SOURCE_DIR}/igd/)
 set(IGD_UI_ROOT ${CMAKE_SOURCE_DIR}/ui/)
 set(IGD_QML_ROOT ${IGD_UI_ROOT}qml/)
+set(IGD_ASSETS_ROOT ${CMAKE_SOURCE_DIR}/assets/)
 
 set(IGD_UI_SOURCES
     backend/models/SurfaceModel.cxx
@@ -107,6 +108,7 @@ string_prepend(IGD_UI_SOURCES ${IGD_UI_ROOT} ${IGD_UI_SOURCES})
 
 set(IGD_QRC_RESOURCES
     ${IGD_QML_ROOT}/res.qrc
+    ${IGD_ASSETS_ROOT}/res.qrc
 )
 
 set(IGD_SOURCES
@@ -123,6 +125,8 @@ dump_definitions()
 add_executable(isometric ${IGD_UI_SOURCES} ${IGD_QRC_RESOURCES} ${IGD_SOURCES})
 set_target_properties(isometric PROPERTIES COMPILE_FLAGS ${IGD_CXX_COMPILEFLAGS})
 target_link_libraries(isometric ${IGD_EXTERNAL_LIBS})
+
+file(COPY ${IGD_ASSETS_ROOT} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/assets/)
 
 highlight_matching(${IGD_ROOT}/*.h)
 highlight_matching(${IGD_ROOT}/*.cxx)
