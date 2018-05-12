@@ -6,6 +6,8 @@ Loader {
     property string source
     property var properties
 
+    asynchronous: true
+
     onInitializedChanged: {
         if (initialized)
             setSource(source, bindProperties());
